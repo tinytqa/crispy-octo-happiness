@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý điểm số</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/grade.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/grade.js"></script>
+    
+</head>
+<body>
+    <div class="page-header">
+        <h2 class="page-title">Quản lý điểm số</h2>
+        <div class="action-buttons">
+            <button class="btn" id="save-grades-btn">
+                <i class="fas fa-save"></i> Lưu điểm
+            </button>
+        </div>
+    </div>
+
+    <div class="grade-header">
+        <div class="class-selector-container">
+            <div class="filter-group">
+                <label class="filter-label">Lớp</label>
+                <select class="filter-select" id="class-selector">
+                    
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Môn học</label>
+                <select class="filter-select" id="subject-selector">
+                    <option value="toan">Toán học</option>
+                    <option value="vatly">Vật lý</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="semester-tabs">
+            <button class="semester-tab active" data-semester="1">Học kỳ 1</button>
+            <button class="semester-tab" data-semester="2">Học kỳ 2</button>
+        </div>
+    </div>
+
+    <div class="grade-controls">
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Tìm kiếm học sinh...">
+        </div>
+    </div>
+
+    <div class="grade-content active" id="overall-tab">
+        <div class="table-responsive">
+            <table class="grade-table">
+                <thead>
+                    <tr>
+                        <th class="sticky-col">STT</th>
+                        <th class="sticky-col">Mã HS</th>
+                        <th class="sticky-col">Họ và tên</th>
+                        <th>15 phút</th>     
+                        <th>Giữa kỳ</th>
+                        <th>Cuối kỳ</th>
+                        <th>TB Môn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>HS10A101</td>
+                        <td>Nguyễn Văn An</td>
+                        <td><input type="text" class="grade-input" value="8.5"></td>
+                        <td><input type="text" class="grade-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input" value="7.5"></td>
+                        <td><input type="text" class="grade-input" value="8.0"></td>
+                        <td><input type="text" class="grade-input" value="7.5"></td>
+                        <td>8.0</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>HS10A102</td>
+                        <td>Lê Thị Bình</td>
+                        <td><input type="text" class="grade-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input" value="8.5"></td>
+                        <td><input type="text" class="grade-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input" value="8.5"></td>
+                        <td><input type="text" class="grade-input" value="9.0"></td>
+                        <td>8.8</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>HS10A103</td>
+                        <td>Trần Văn Cường</td>
+                        <td><input type="text" class="grade-input" value="7.0"></td>
+                        <td><input type="text" class="grade-input" value="6.5"></td>
+                        <td><input type="text" class="grade-input" value="7.0"></td>
+                        <td><input type="text" class="grade-input" value="6.0"></td>
+                        <td><input type="text" class="grade-input" value="6.5"></td>
+                        <td>6.6</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>HS10A104</td>
+                        <td>Phạm Thị Dung</td>
+                        <td><input type="text" class="grade-input" value="10"></td>
+                        <td><input type="text" class="grade-input" value="9.5"></td>
+                        <td><input type="text" class="grade-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input" value="9.5"></td>
+                        <td><input type="text" class="grade-input" value="9.0"></td>
+                        <td>9.4</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>HS10A105</td>
+                        <td>Hoàng Văn Em</td>
+                        <td><input type="text" class="grade-input" value="5.5"></td>
+                        <td><input type="text" class="grade-input" value="6.0"></td>
+                        <td><input type="text" class="grade-input" value="5.0"></td>
+                        <td><input type="text" class="grade-input" value="5.5"></td>
+                        <td><input type="text" class="grade-input" value="4.5"></td>
+                        <td>5.3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Nội dung tab chi tiết điểm thành phần -->
+    <div class="grade-content" id="detail-tab">
+        <div class="table-responsive">
+            <table class="grade-table detailed-table">
+                <thead>
+                    <tr>
+                        <th class="sticky-col" rowspan="2">STT</th>
+                        <th class="sticky-col" rowspan="2">Mã HS</th>
+                        <th class="sticky-col" rowspan="2">Họ và tên</th>
+                        <th colspan="2">Điểm 15 phút</th>
+                        <th rowspan="2">Giữa kỳ</th>
+                        <th rowspan="2">Cuối kỳ</th>
+                        <th rowspan="2">TB Môn</th>
+                    </tr>
+                    <tr>
+                        <th>M1</th>
+                        <th>M2</th>
+                        <th>M3</th>
+                        <th>15p-1</th>
+                        <th>15p-2</th>
+                        <th>1T-1</th>
+                        <th>1T-2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>HS10A101</td>
+                        <td>Nguyễn Văn An</td>
+                        <td><input type="text" class="grade-input small-input" value="8.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="8.5"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="7.5"></td>
+                        <td><input type="text" class="grade-input small-input" value="7.5"></td>
+                        <td><input type="text" class="grade-input small-input" value="8.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="7.5"></td>
+                        <td>8.0</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>HS10A102</td>
+                        <td>Lê Thị Bình</td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="8.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="8.5"></td>
+                        <td><input type="text" class="grade-input small-input" value="9.0"></td>
+                        <td>8.8</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>HS10A103</td>
+                        <td>Trần Văn Cường</td>
+                        <td><input type="text" class="grade-input small-input" value="7.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="7.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="7.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="6.5"></td>
+                        <td><input type="text" class="grade-input small-input" value="6.5"></td>
+                        <td><input type="text" class="grade-input small-input" value="7.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="7.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="6.0"></td>
+                        <td><input type="text" class="grade-input small-input" value="6.5"></td>
+                        <td>6.6</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    </div>
+
+    
+</body>
+</html>

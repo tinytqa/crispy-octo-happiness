@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Management</title>
+    <link rel="stylesheet" href="css/giaovien.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/class.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <button id="showAddFormButton" onclick="showAddForm()">Add New Class</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Class ID</th>
+                    <th>Class Name</th>
+                    <th>Class Teacher</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody id="classList"></tbody>
+        </table>
+    </div>
+
+    <div id="addClassPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideAddForm()">&times;</span>
+            <div class="form-section">
+                <h2>Add New Class</h2>
+                <form id="classForm">
+                    <input type="text" id="classID" placeholder="Class ID">
+                <input type="text" id="className" placeholder="Class Name">
+                <!-- <input type="text" id="teacherId" placeholder="TeacherID"> -->
+                <div>
+                    <select id="cbTeacher" class="form-control">
+                        <option value="">Select Teacher</option>
+                    </select>
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button id="submitButton" onclick="addClass()">Add Class</button>
+        </div>
+    </div>
+
+    <div id="editClassPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideEditForm()">&times;</span>
+            <div class="form-section">
+                <h2>Edit Class</h2>
+                <form id="editClassForm">
+                    <input type="text" id="editClassId" placeholder="Class ID">
+                <input type="text" id="editClassName" placeholder="Class Name">
+                <!-- <input type="text" id="teacherId" placeholder="TeacherID"> -->
+                <div>
+                    <select id="editcbTeacher" class="form-control">
+                        <option value="">Select Teacher</option>
+                    </select>
+                </form>
+                
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button id="submitButton" onclick="saveEdit()">Save Changes</button>
+        </div>
+    </div>
+    <div id="studentListPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideStudentList()">&times;</span>
+            <h2 id="classTitle"></h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mã Học Sinh</th>
+                        <th>Tên Học Sinh</th>
+                        <th>Ngày Sinh</th>
+                    </tr>
+                </thead>
+                <tbody id="studentList"></tbody>
+            </table>
+        </div>
+    </div>
+    
+    
+
+</body>
+
+</html>

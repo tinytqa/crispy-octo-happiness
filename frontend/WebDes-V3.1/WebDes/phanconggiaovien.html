@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân Công Giáo Viên</title>
+    <link rel="stylesheet" href="css/giaovien.css">
+    <link rel="stylesheet" href="css/phancong.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <button id="showAddAssignmentButton" onclick="showAddAssignmentForm()">Thêm Phân Công Mới</button>
+        
+        <!-- Phần lọc và hiển thị phân công -->
+        <div class="filter-section">
+            <div>
+                <label for="teacherFilter">Giáo viên:</label>
+                <select id="teacherFilter">
+                    <option value="">Tất cả giáo viên</option>
+                    <!-- Sẽ được điền bằng JavaScript -->
+                </select>
+            </div>
+            
+            <div>
+                <label for="classFilter">Lớp:</label>
+                <select id="classFilter">
+                    <option value="">Tất cả lớp</option>
+                    <!-- Sẽ được điền bằng JavaScript -->
+                </select>
+            </div>
+            
+            <div>
+                <label for="subjectFilter">Môn học:</label>
+                <select id="subjectFilter">
+                    <option value="">Tất cả môn</option>
+                    <!-- Sẽ được điền bằng JavaScript -->
+                </select>
+            </div>
+            
+            <button onclick="applyFilters()">Lọc</button>
+        </div>
+
+        <!-- Bảng phân công -->
+        <table class="assignment-table">
+            <thead>
+                <tr>
+                    <th>Giáo viên</th>
+                    <th>Lớp</th>
+                    <th>Môn học</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="assignmentList">
+                <!-- Dữ liệu sẽ được điền bằng JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Form popup thêm/sửa phân công -->
+    <div id="assignmentPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideAssignmentForm()">&times;</span>
+            <div class="form-section">
+                <h2 id="formTitle">Thêm Phân Công Mới</h2>
+                
+                <div class="input-group">
+                    <label for="teacherSelect">Giáo viên:</label>
+                    <select id="teacherSelect" required>
+                        <!-- <option value="">Chọn giáo viên</option> -->
+                        <!-- Sẽ được điền bằng JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="classSelect">Lớp:</label>
+                    <select id="classSelect" required>
+                        <option value="">Chọn lớp</option>
+                        <!-- Sẽ được điền bằng JavaScript -->
+                    </select>
+                </div>
+                
+                <!-- Danh sách môn học -->
+                <div class="subject-section">
+                    <h3>Subjects (select at least one):</h3>
+                    <div class="subjects-container" id="subjectsSelect">
+                        <!-- Các checkbox môn học sẽ được load động -->
+                    </div>
+                </div>
+                
+                <input type="hidden" id="assignmentId">
+                <div class="button-container">
+                    <button id="submitAssignmentButton" onclick=" addAssignment()">Lưu Phân Công</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/phanconggiaovien.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+/* Reset CSS và thiết lập font chung */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Thiết lập nền và màu chữ cho body */
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Container chính */
+.container {
+    width: 100%;
+    margin: 0 auto; /* Changed from 50px auto to 0 auto */
+    background: white;
+    padding: 20px;
+    border-radius: 8px; /* Changed from 8px to 0 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+/* Tiêu đề phụ */
+h3 {
+    color: #2d7aba;
+    margin-bottom: 10px;
+}
+
+
+/* Input chung */
+input[type="text"], input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+/* Hiệu ứng khi focus input */
+input:focus {
+    border-color: #2d7aba;
+    outline: none;
+    box-shadow: 0 0 5px rgba(45, 122, 186, 0.2);
+}
+
+/* Nút chính */
+button {
+    background-color: #2d7aba;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* Hiệu ứng khi hover nút */
+button:hover {
+    background-color: #236293;
+}
+
+/* Bảng danh sách giáo viên */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+/* Header bảng */
+th {
+    background-color: #2d7aba;
+    color: white;
+}
+
+
+
+/* Make the popup more mobile-friendly */
+@media (max-width: 768px) {
+    .popup-content {
+        width: 95%;
+        padding: 15px;
+    }
+}

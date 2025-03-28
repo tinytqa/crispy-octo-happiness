@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page-title {
+    font-size: 22px;
+    color: #333;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 15px;
+    background-color: #2d7aba;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.btn:hover {
+    background-color: #236293;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #2d7aba;
+    border: 1px solid #2d7aba;
+}
+
+.btn-outline:hover {
+    background-color: #f0f7ff;
+}
+
+.grade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.class-selector-container {
+    display: flex;
+    gap: 15px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.filter-select {
+    padding: 8px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    min-width: 150px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.semester-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.semester-tab {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.semester-tab.active {
+    background-color: #2d7aba;
+    color: white;
+    border-color: #2d7aba;
+}
+
+.grade-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 15px 8px 35px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.grade-filters {
+    display: flex;
+    gap: 15px;
+}
+
+.grade-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.grade-tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.grade-tab:hover {
+    color: #2d7aba;
+}
+
+.grade-tab.active {
+    color: #2d7aba;
+    border-bottom-color: #2d7aba;
+    font-weight: 500;
+}
+
+.grade-content {
+    display: none;
+}
+
+.grade-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+}
+
+.grade-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.grade-table th, .grade-table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.grade-table thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.sticky-col {
+    position: sticky;
+    left: 0;
+    background-color: #f8f9fa;
+    z-index: 9;
+}
+
+.grade-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.grade-input {
+    width: 60px;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.small-input {
+    width: 45px;
+}
+
+.grade-input:focus {
+    border-color: #2d7aba;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(45, 122, 186, 0.2);
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.badge-excellent {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-good {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.badge-average {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-weak {
+    background-color: #dc3545;
+    color: white;
+}
+
+.class-info-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.info-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info-item i {
+    font-size: 20px;
+    color: #2d7aba;
+    background-color: rgba(45, 122, 186, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-content {
+    flex: 1;
+}
+
+.info-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.detailed-table th, .detailed-table td {
+    text-align: center;
+}
+
+.detailed-table .sticky-col {
+    text-align: left;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .grade-header, .grade-controls {
+        flex-direction: column;
+    }
+
+    .class-selector-container, .grade-filters {
+        width: 100%;
+    }
+
+    .grade-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .class-info-panel {
+        grid-template-columns: 1fr;
+    }
+}

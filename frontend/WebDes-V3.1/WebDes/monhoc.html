@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Management</title>
+    <link rel="stylesheet" href="css/giaovien.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/subject.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <button id="showAddFormButton" onclick="showAddForm()">Add New Subject</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject ID</th>
+                    <th>Subject Name</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody id="subjectList"></tbody>
+        </table>
+    </div>
+
+    <div id="addSubjectPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideAddForm()">&times;</span>
+            <div class="form-section">
+                <h2>Add New Subject</h2>
+                <form id ="subjectForm">
+                    <input type="text" id="sbID" placeholder="Subject ID">
+                <input type="text" id="sbName" placeholder="Subject Name">
+                </form>
+                <!-- cần thêm tự đông teacher email -->
+            </div>
+        </div>
+        <div class="button-container">
+            <button id="submitButton" onclick="addSubject()">Add Subject</button>
+        </div>
+    </div>
+  
+</body>
+
+</html>

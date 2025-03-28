@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Quản lý Giáo dục</title>
+    <!-- Thêm Font Awesome để sử dụng icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/adminDash.css">
+    <script src="js/adminDash.js" defer></script>
+    <!-- jQuery phiên bản mới nhất 3.x -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</head>
+
+<body>
+    <header class="header">
+
+        <!-- Container logo và title -->
+        <div class="logo-container">
+            <img src="/api/placeholder/40/40" alt="Logo Trường" class="logo">
+            <div class="header-title">Parent</div>
+        </div>
+
+        <!-- Icon tài khoản hình tròn góc phải -->
+        <div class="user-account-menu">
+            <div class="user-avatar" id="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <!-- Menu dropdown -->
+            <div class="account-dropdown" id="account-dropdown">
+                <a href="profile.html" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i> Thông tin cá nhân
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <i class="fas fa-cog"></i> Cài đặt tài khoản
+                </a>
+                <a href="password.html" class="dropdown-item">
+                    <i class="fas fa-key"></i> Đổi mật khẩu
+                </a>
+                <a href="WebDes-V3.1\WebDes\login.html" class="dropdown-item logout">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar với menu điều hướng -->
+        <nav class="sidebar">
+            <!-- Hiển thị tên người dùng -->
+            <div class="user-info">
+                <div class="user-name">Trần Thị B</div>
+                <div class="user-role">Phụ huynh</div>
+            </div>
+
+            <ul class="nav-menu">
+                <!-- Các mục menu với icon phù hợp -->
+
+                <li class="nav-item" data-page="listGiaoVien.html" data-icon="fa-chalkboard-teacher">
+                    <span><i class="fas fa-chalkboard-teacher"></i> Giáo viên</span>
+                </li>
+                <li class="nav-item" data-page="listHocsinh.html" data-icon="fa-user-graduate">
+                    <span><i class="fas fa-user-graduate"></i> Học sinh</span>
+                </li>
+                <li class="nav-item" data-page="diem.html" data-icon="fa-bars">
+                    <span><i class="fas fa-bars"></i> Điểm</span>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <!-- Tiêu đề của trang hiện tại với icon -->
+            <h1 class="content-header"><i class="fas fa-book"></i> Môn học</h1>
+
+            <!-- iframe để hiển thị nội dung tương ứng -->
+            <iframe id="content-frame" class="content-frame" src="listHocSinh.html"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>

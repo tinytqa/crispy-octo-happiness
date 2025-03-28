@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="css/giaovien.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/student.js"></script>
+</head>
+<body>
+    <div class="container">
+        <button id="showAddFormButton" onclick="showAddForm()">Add New Student</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Grade</th>
+                    <th>Class</th>
+                    <th>Date of Birth</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody id="studentList"></tbody>
+        </table>
+    </div>
+    <div id="addStudentPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideAddForm()">&times;</span>
+            <div class="form-section">
+                <center><h2>Add New Student</h2></center>
+                <form id ="studentForm">
+                <input type="text" id="studentID" placeholder="Student ID">
+                <input type="text" id="studentName" placeholder="Student Name">
+                <input type="text" id="grade" placeholder="Grade">
+                <div>
+                    <select id="cbClass" class="form-control">
+                        <option value="">Select Class</option>
+                    </select>
+                </div>
+                <input type="date" id="dob" placeholder="Date of Birth">
+                </form>
+                
+            </div> 
+            <center>
+                <div class="button-container">
+                    <button id="submitButton" onclick="addStudent()">Add Student</button>
+                </div>
+            </center>
+            
+        </div>
+        
+    </div>
+    <div id="editStudentPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideEditForm()">&times;</span>
+            <div class="form-section">
+                <h2>Edit Student</h2>
+                <form id="editStudentForm">
+                    <input type="hidden" id="editStudentId">
+                    <input type="text" id="editStudentName" placeholder="Student Name">
+                    <input type="text" id="editGradeLevel" placeholder="Grade">
+                    <div>
+                        <select id="editClass" class="form-control">
+                            <option value="">Select Class</option>
+                        </select>
+                    </div>
+                    <input type="date" id="editDob" placeholder="Date of Birth">
+                </form>
+            </div>
+            <div class="button-container">
+                <button onclick="saveEdit()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

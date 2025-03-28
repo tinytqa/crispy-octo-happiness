@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Quản lý Giáo dục</title>
+    <!-- Thêm Font Awesome để sử dụng icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/adminDash.css">
+    <!-- jQuery phiên bản mới nhất 3.x -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <!-- Toggle sidebar button -->
+        <button class="sidebar-toggle" id="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Container logo và title -->
+        <div class="logo-container">
+            <img src="img\school.png" alt="Logo Trường" class="logo">
+            <div class="header-title">Admin Dashboard</div>
+        </div>
+
+        <!-- Icon tài khoản hình tròn góc phải -->
+        <div class="user-account-menu">
+            <div class="user-avatar" id="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <!-- Menu dropdown -->
+            <div class="account-dropdown" id="account-dropdown">
+                <a href="profile.html" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i> Thông tin cá nhân
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <i class="fas fa-cog"></i> Cài đặt tài khoản
+                </a>
+                <a href="password.html" class="dropdown-item">
+                    <i class="fas fa-key"></i> Đổi mật khẩu
+                </a>
+                <a href="login.html" class="dropdown-item logout">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar với menu điều hướng -->
+        <nav class="sidebar" id="sidebar">
+            <!-- Hiển thị tên người dùng thay vì semester -->
+            <div class="user-info">
+                <div class="user-name">Nguyễn Văn A</div>
+                <div class="user-role">Quản trị viên</div>
+            </div>
+
+            <ul class="nav-menu">
+                <!-- Các mục menu với icon phù hợp -->
+                <li class="nav-item active" data-page="monhoc.html" data-icon="fa-book">
+                    <span>
+                        <i class="fas fa-book"></i>
+                        <span class="item-text">Môn học</span>
+                    </span>
+                    <div class="tooltip">Môn học</div>
+                </li>
+                <li class="nav-item" data-page="giaovien.html" data-icon="fa-chalkboard-teacher">
+                    <span>
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span class="item-text">Giáo viên</span>
+                    </span>
+                    <div class="tooltip">Giáo viên</div>
+                </li>
+                <li class="nav-item" data-page="hocsinh.html" data-icon="fa-user-graduate">
+                    <span>
+                        <i class="fas fa-user-graduate"></i>
+                        <span class="item-text">Học sinh</span>
+                    </span>
+                    <div class="tooltip">Học sinh</div>
+                </li>
+                <li class="nav-item" data-page="phuhuynh.html" data-icon="fa-users">
+                    <span>
+                        <i class="fas fa-users"></i>
+                        <span class="item-text">Phụ huynh</span>
+                    </span>
+                    <div class="tooltip">Phụ huynh</div>
+                </li>
+                <li class="nav-item" data-page="lop.html" data-icon="fa-door-open">
+                    <span>
+                        <i class="fas fa-door-open"></i>
+                        <span class="item-text">Lớp</span>
+                    </span>
+                    <div class="tooltip">Lớp</div>
+                </li>
+                <li class="nav-item" data-page="phanconggiaovien.html" data-icon="fa-tasks">
+                    <span>
+                        <i class="fas fa-tasks"></i>
+                        <span class="item-text">Phân công giáo viên</span>
+                    </span>
+                    <div class="tooltip">Phân công giáo viên</div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <!-- Tiêu đề của trang hiện tại với icon -->
+            <h1 class="content-header"><i class="fas fa-book"></i> Môn học</h1>
+
+            <!-- iframe để hiển thị nội dung tương ứng -->
+            <iframe id="content-frame" class="content-frame" src="monhoc.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Toggle user dropdown menu
+            $('#user-avatar').click(function() {
+                $('#account-dropdown').toggleClass('show');
+            });
+
+            // Close dropdown when clicking outside
+            $(document).click(function(e) {
+                if (!$(e.target).closest('.user-account-menu').length) {
+                    $('#account-dropdown').removeClass('show');
+                }
+            });
+
+            // Toggle sidebar
+            $('#sidebar-toggle').click(function() {
+                $('#sidebar').toggleClass('collapsed');
+                // Update icon when toggled
+                if ($('#sidebar').hasClass('collapsed')) {
+                    $(this).find('i').removeClass('fa-bars').addClass('fa-bars-staggered');
+                } else {
+                    $(this).find('i').removeClass('fa-bars-staggered').addClass('fa-bars');
+                }
+            });
+
+            // Navigation menu functionality
+            $('.nav-item').click(function() {
+                // Remove active class from all menu items
+                $('.nav-item').removeClass('active');
+                
+                // Add active class to clicked item
+                $(this).addClass('active');
+                
+                // Get page to load and update icon
+                var pageToLoad = $(this).data('page');
+                var iconClass = $(this).data('icon');
+                
+                // Update content header
+                var menuText = $(this).find('.item-text').text();
+                $('.content-header').html('<i class="fas ' + iconClass + '"></i> ' + menuText);
+                
+                // Load content in iframe
+                $('#content-frame').attr('src', pageToLoad);
+            });
+        });
+    </script>
+</body>
+
+</html>

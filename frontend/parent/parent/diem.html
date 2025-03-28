@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điểm học tập</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="css/xemdiem.css">
+</head>
+<body>
+    <!-- Main container for the grade table app -->
+    <div class="container">
+        <!-- Header section with title and close button -->
+        <div class="header">
+            <h1>Bảng điểm học tập</h1>
+        </div>
+        
+        <!-- Tab navigation system -->
+        <div class="tabs">
+            <div class="tab active" data-tab="semester1">Học kỳ I</div>
+            <div class="tab" data-tab="semester2">Học kỳ II</div>
+            <div class="tab" data-tab="yearTotal">Tổng kết</div>
+        </div>
+        
+        <!-- Tab content for Semester 1 -->
+        <div id="semester1" class="tab-content active">
+            <table>
+                <!-- Table header with column titles -->
+                <thead>
+                    <tr>
+                        <th class="subject-column">Môn học</th>
+                        <th>ĐĐGtx</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>ĐĐGgk</th>
+                        <th>ĐĐGck</th>
+                        <th>TBHKI</th>
+                    </tr>
+                </thead>
+                <!-- Table body with grade data -->
+                <tbody>
+                    <tr>
+                        <td class="subject-column">Toán</td>
+                        <td>6</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>9</td>
+                        <td>6.3</td>
+                        <td>6.3</td>
+                        <td>6.4</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Sinh học</td>
+                        <td>9.5</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td></td>
+                        <td>9</td>
+                        <td>9</td>
+                        <td>9.2</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Tin học</td>
+                        <td>8.5</td>
+                        <td>7</td>
+                        <td>8.5</td>
+                        <td></td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>9.0</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Ngữ Văn</td>
+                        <td>10</td>
+                        <td>9</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>8.3</td>
+                        <td>6</td>
+                        <td>8.1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Tab content for Semester 2 -->
+        <div id="semester2" class="tab-content">
+            <table>
+                <!-- Table header with column titles -->
+                <thead>
+                    <tr>
+                        <th class="subject-column">Môn học</th>
+                        <th>ĐĐGtx</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>ĐĐGgk</th>
+                        <th>ĐĐGck</th>
+                        <th>TBHKII</th>
+                    </tr>
+                </thead>
+                <!-- Table body with grade data -->
+                <tbody>
+                    <tr>
+                        <td class="subject-column">Toán</td>
+                        <td>7</td>
+                        <td>7.5</td>
+                        <td>8</td>
+                        <td>6.5</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>7.5</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Sinh học</td>
+                        <td>8.5</td>
+                        <td>9.5</td>
+                        <td>9</td>
+                        <td>8.5</td>
+                        <td>9</td>
+                        <td>9.5</td>
+                        <td>9.2</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Tin học</td>
+                        <td>9</td>
+                        <td>9.5</td>
+                        <td>8.5</td>
+                        <td>9</td>
+                        <td>8.5</td>
+                        <td>9.5</td>
+                        <td>9.0</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Ngữ Văn</td>
+                        <td>7.5</td>
+                        <td>8</td>
+                        <td>7.5</td>
+                        <td>8</td>
+                        <td>7.5</td>
+                        <td>8.5</td>
+                        <td>8.0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Tab content for Yearly Summary -->
+        <div id="yearTotal" class="tab-content">
+            <table>
+                <!-- Table header with column titles -->
+                <thead>
+                    <tr>
+                        <th class="subject-column">Môn học</th>
+                        <th>TBHKI</th>
+                        <th>TBHKII</th>
+                        <th>Cả năm</th>
+                    </tr>
+                </thead>
+                <!-- Table body with grade data -->
+                <tbody>
+                    <tr>
+                        <td class="subject-column">Toán</td>
+                        <td>6.4</td>
+                        <td>7.5</td>
+                        <td>7.0</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Sinh học</td>
+                        <td>9.2</td>
+                        <td>9.2</td>
+                        <td>9.2</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Tin học</td>
+                        <td>9.0</td>
+                        <td>9.0</td>
+                        <td>9.0</td>
+                    </tr>
+                    <tr>
+                        <td class="subject-column">Ngữ Văn</td>
+                        <td>8.1</td>
+                        <td>8.0</td>
+                        <td>8.0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="js/xemdiem.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</body>
+</html>

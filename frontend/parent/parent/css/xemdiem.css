@@ -1,0 +1,224 @@
+/* 
+ * Global styles - Apply to all elements
+ * Sets box-sizing to border-box for more predictable sizing
+ * Sets default font for all elements
+ */
+ * {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+ * HTML and Body styles
+ * Sets height to 100% to allow full-screen content
+ * Removes default margin and padding
+ */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    overflow: hidden; /* Prevents scrollbars */
+}
+
+/* 
+ * Main container styles
+ * Uses 100% of viewport height and width
+ * No max-width limitation for full-screen usage
+ */
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 
+ * Header section styles
+ * Fixed height with relative positioning
+ * Centers text and adds bottom border
+ */
+.header {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+/* Title in header */
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* 
+ * Close button styles
+ * Positions in top right corner, creates circular shape
+ * Sets up flex display for centering the X mark
+ */
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+/* 
+ * Tab navigation container styles
+ * Uses flexbox for horizontal layout
+ * Adds border at bottom
+ */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #fff;
+}
+
+/* 
+ * Individual tab styles
+ * Equal width tabs with centered text
+ * Adds padding and makes cursor a pointer to indicate clickability
+ */
+.tab {
+    padding: 15px 0;
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+}
+
+/* 
+ * Active tab styles
+ * Bold text and blue color to indicate selected state
+ */
+.tab.active {
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+/* 
+ * Active tab indicator
+ * Creates a blue line under the active tab
+ */
+.tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #1a73e8;
+}
+
+/* 
+ * Tab content container styles
+ * Adds padding and hides non-active content
+ * Flex-grow to fill available space
+ * Uses overflow-auto to handle content that exceeds the viewport
+ */
+.tab-content {
+    display: none;
+    flex: 1;
+    overflow: auto;
+    padding: 0;
+}
+
+/* Shows active content */
+.tab-content.active {
+    display: block;
+}
+
+/* 
+ * Table styles
+ * Full width with collapsed borders
+ * Sticky header for better usability with scrolling
+ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 
+ * Table cell styles
+ * Adds padding, centers text, adds borders
+ */
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+}
+
+/* 
+ * Table header styles
+ * Light background color and normal font weight
+ * Sticky positioning to keep headers visible when scrolling
+ */
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: normal;
+}
+
+/* 
+ * Zebra striping for rows
+ * Alternating background colors for better readability
+ */
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* 
+ * Subject column styles
+ * Left-aligns text in the first column
+ */
+.subject-column {
+    text-align: left;
+    min-width: 120px; /* Ensures consistent width */
+}
+
+/* 
+ * Make the table fill available space in tab content
+ */
+.tab-content table {
+    height: 100%;
+}
+
+/* 
+ * Media query for better responsiveness on very small screens
+ */
+@media screen and (max-width: 600px) {
+    .tab {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .header h1 {
+        font-size: 20px;
+    }
+}

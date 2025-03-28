@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Management</title>
+    <link rel="stylesheet" href="css/giaovien.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/parent.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <button id="showAddFormButton" onclick="showAddForm()">Add New Parent</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parent ID</th>
+                    <th>Parent Name</th>
+                    <th>Number</th>
+                    <th>Password</th>
+                    <th>Student Name</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody id="parentList"></tbody>
+        </table>
+    </div>
+
+    <div id="addParentPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideAddForm()">&times;</span>
+            <div class="form-section">
+                <h2>Add New Parent</h2>
+                <form id="parentForm">
+                    <input type="text" id="parentID" placeholder="Parent ID">
+                    <input type="text" id="parentName" placeholder="Parent Name">
+                    <input type="text" id="parentPhone" placeholder="Phone Number">
+                    <input type="password" id="parentPassword" placeholder="Password">
+                    <button type="button" onclick="openStudentList()" id="selectStudentsBtn">
+                        Select Students
+                    </button>
+                    <input type="text" id="selectedStudentsInput" placeholder="Selected Students" readonly>
+                </form>
+            </div>
+            <div class="button-container">
+                <button id="submitButton" onclick="addParent()">Add Parent</button>
+            </div>
+        </div>
+    </div>
+    <div id="editParentPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hideEditForm()">&times;</span>
+            <div class="form-section">
+                <h2>Edit Parent</h2>
+                <form id="editParentForm">
+                    <input type="hidden" id="editParentId">
+                    <input type="text" id="editParentName" placeholder="Parent Name">
+                    <input type="text" id="editParentPhone" placeholder="Phone Number">
+                   
+                    <input type="password" id="editParentPassword" placeholder="Password">
+                    <div>
+                        <button type="button" onclick="openStudentList(true)" id="editselectStudentsBtn">
+                            Select Students
+                        </button>                        
+                        <input type="text" id="editselectedStudentsInput" placeholder="Selected Students" readonly>
+                    </div>
+                </form>
+            </div>
+            <div class="button-container">
+                <button onclick="saveEditParent()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+    <!-- Dialog danh sách học sinh -->
+    <div id="studentListPopup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closeStudentList()">&times;</span>
+            <input type="text" id="searchStudentInput" placeholder="Search Student..." onkeyup="filterStudentList()">
+            <center>
+                <h3>Select Students</h3>
+            </center>
+            
+            <table border="1" id="studentTable">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>Date of Birth</th>
+                        <th>Class</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Danh sách học sinh sẽ được load vào đây -->
+                </tbody>
+            </table>
+            <button onclick="confirmSelectedStudents()">Confirm</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</body>
+
+</html>
