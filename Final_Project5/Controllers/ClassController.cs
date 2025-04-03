@@ -24,7 +24,6 @@ namespace Final_Project5.Controllers
         {
             try
             {
-
                 var classes = N10Nhom3Context.TblClasses
                        .Select(c => new
                        {

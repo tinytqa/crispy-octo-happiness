@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P/YRBnntC9k=",
+  "dgSpecHash": "kqvGxa8gMI4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\tranq\\OneDrive\\Documents\\IT\\Uni\\2\\2nd term\\Final Project\\Web\\Final_Project5\\Final_Project5.csproj",
+  "projectFilePath": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Final_Project5.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tranq\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\tranq\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
