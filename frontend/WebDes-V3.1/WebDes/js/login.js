@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (role === "admin") {
                             window.location.href = "adminDash.html";
                         } else if (role === "teacher") {
-                            window.location.href = "/teacher2/teacher2/teacherTab.html";
+                            window.location.href = "../../teacher2/teacher2/teacherTab.html";
                         } else if (role === "parent") {
                             window.location.href = "/parent/parent/parentTab.html";
                         }

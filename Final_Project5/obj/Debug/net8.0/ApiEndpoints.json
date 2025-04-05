@@ -827,6 +827,27 @@
   },
   {
     "ContainingType": "Final_Project5.Controllers.TeacherSubjectClassController",
+    "Method": "GetSubjectsByClassAndTeacher",
+    "RelativePath": "api/TeacherSubjectClass/get-subjects",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final_Project5.Controllers.TeacherSubjectClassController",
     "Method": "GetClassesByTeacher",
     "RelativePath": "api/TeacherSubjectClass/getClassesByTeacher",
     "HttpMethod": "GET",

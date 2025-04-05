@@ -1107,6 +1107,34 @@
         }
       }
     },
+    "/api/TeacherSubjectClass/get-subjects": {
+      "get": {
+        "tags": [
+          "TeacherSubjectClass"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/TeacherSubjectClass/getClassesByTeacher": {
       "get": {
         "tags": [
