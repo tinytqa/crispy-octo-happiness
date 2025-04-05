@@ -95,6 +95,22 @@
   },
   {
     "ContainingType": "Final_Project5.Controllers.GradeComponentController",
+    "Method": "GetBySubjectId",
+    "RelativePath": "api/GradeComponent/by-subject",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subjectId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final_Project5.Controllers.GradeComponentController",
     "Method": "Delete",
     "RelativePath": "api/GradeComponent/delete",
     "HttpMethod": "DELETE",

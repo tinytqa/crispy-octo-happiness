@@ -35,6 +35,28 @@ namespace Final_Project5.Controllers
                 return BadRequest("An error occurred when showing the table!");
             }
         }
+        [HttpGet]
+        [Route("by-subject")]
+        public IActionResult GetBySubjectId([FromQuery] string subjectId)
+        {
+            try
+            {
+                var components = SLL1.TblGradeComponents
+                    .Where(gc => gc.GcSjId == subjectId)
+                    .ToList();
+
+                if (components.Count == 0)
+                {
+                    return NotFound("No grade components found for the given subject ID.");
+                }
+
+                return Ok(components);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("An error occurred while retrieving grade components.");
+            }
+        }
 
         [HttpPost]
         [Route("insert")]

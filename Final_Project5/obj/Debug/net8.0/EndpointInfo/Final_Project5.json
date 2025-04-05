@@ -141,6 +141,27 @@
         }
       }
     },
+    "/api/GradeComponent/by-subject": {
+      "get": {
+        "tags": [
+          "GradeComponent"
+        ],
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/GradeComponent/insert": {
       "post": {
         "tags": [

@@ -40,20 +40,25 @@ namespace Final_Project5.Controllers
         {
             // Lấy danh sách điểm của học sinh theo lớp và môn học
             var studentGrades = await SLL1.TblStudentGrades
-                .Include(sg => sg.StugStu)  // Liên kết với bảng học sinh
-                .Include(sg => sg.StugGc)   // Liên kết với bảng GradeComponent
-                .ThenInclude(gc => gc.GcSj)  // Liên kết bảng GradeComponent với bảng Subject
-                .Where(sg => sg.StugStu.StuCId == classId && sg.StugGc.GcSjId == subjectId)  // Lọc theo lớp và môn học
-                .Select(sg => new
-                {
-                    stu_id = sg.StugStu.StuId,
-                    stu_name = sg.StugStu.StuName,
-                    gc_name = sg.StugGc.GcName,
-                    stug_grade = sg.StugGrade,
-                    gc_weight = sg.StugGc.GcWeight,
-                    finalGrade = sg.StugGrade // Có thể tính toán điểm cuối kỳ ở đây nếu cần
-                })
-                .ToListAsync();
+    .Include(sg => sg.StugStu)
+    .Include(sg => sg.StugGc)
+    .ThenInclude(gc => gc.GcSj)
+    .Where(sg => sg.StugStu.StuCId == classId && sg.StugGc.GcSjId == subjectId)
+    .GroupBy(sg => new { sg.StugStu.StuId, sg.StugStu.StuName })
+    .Select(g => new
+    {
+        stu_id = g.Key.StuId,
+        stu_name = g.Key.StuName,
+        grades = g.Select(x => new
+        {
+            gc_name = x.StugGc.GcName,
+            stug_grade = x.StugGrade,
+            gc_weight = x.StugGc.GcWeight
+        }).ToList(),
+        finalGrade = g.Sum(x => x.StugGrade * x.StugGc.GcWeight) / 100.0
+    })
+    .ToListAsync();
+
 
             // Nếu không có dữ liệu điểm, trả về lỗi 404
             if (studentGrades == null || studentGrades.Count == 0)
