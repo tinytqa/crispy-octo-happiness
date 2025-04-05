@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.log("Lớp được chọn:", classId);
         loadSubjectsByClassAndTeacher(classId, userInfo.id);
         loadStudentsByClass(classId);
+        // Gọi API để tải điểm học sinh
+        loadStudentGrades(classId, subjectSelector.val());
     });
 
     // Gọi sự kiện thay đổi để load môn học của lớp đầu tiên
@@ -40,7 +42,53 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
         });
     }
+    // $("#save-grades-btn").on("click", async function () {
+    //     const subjectId = $("#subject-selector").val();
+    //     const rows = document.querySelectorAll(".grade-table tbody tr");
+    
+    //     if (!subjectId) {
+    //         alert("Vui lòng chọn môn học.");
+    //         return;
+    //     }
+    
+    //     for (const row of rows) {
+    //         const studentId = row.children[1].textContent.trim();
+    //         const inputs = row.querySelectorAll(".grade-input");
+    
+    //         const gradeValues = Array.from(inputs).map(input => parseFloat(input.value));
+    
+    //         // Mặc định bạn có 3 cột điểm: 15 phút, giữa kỳ, cuối kỳ
+    //         const gradeComponents = [
+    //             { gcId: "GC15", grade: gradeValues[0] },
+    //             { gcId: "GCMID", grade: gradeValues[1] },
+    //             { gcId: "GCFINAL", grade: gradeValues[2] }
+    //         ];
+    
+    //         for (const component of gradeComponents) {
+    //             await saveStudentGrade(studentId, component.gcId, subjectId, component.grade);
+    //         }
+    //     }
+    
+    //     alert("Lưu điểm thành công!");
+    // });
+    
 });
+// async function saveStudentGrade(studentId, gcId, subjectId, grade) {
+//     try {
+//         const response = await fetch(`https://localhost:7241/api/studentgrade/insert?sID=${studentId}&gcID=${gcId}&subjectID=${subjectId}&grade=${grade}`, {
+//             method: "POST",
+//         });
+
+//         if (!response.ok) {
+//             const errorText = await response.text();
+//             console.error(`Lỗi lưu điểm cho ${studentId} - ${gcId}:`, errorText);
+//         } else {
+//             console.log(`Lưu điểm thành công cho ${studentId} - ${gcId}`);
+//         }
+//     } catch (err) {
+//         console.error(`Lỗi gọi API lưu điểm:`, err);
+//     }
+// }
 
 async function loadClasses(selectId, token) {
     try {
@@ -149,3 +197,93 @@ async function loadStudentsByClass(classId) {
 }
 
 
+// Hàm để load điểm học sinh và hiển thị ra bảng điểm
+async function loadStudentGrades(classId, subjectId) {
+    try {
+        const token = localStorage.getItem("jwtToken");
+
+        // Gọi API để lấy điểm học sinh
+        const response = await fetch(`https://localhost:7241/api/grades?classId=${classId}&subjectId=${subjectId}`, {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        // Kiểm tra nếu không có dữ liệu hoặc có lỗi
+        if (!response.ok) {
+            console.error("Lỗi khi lấy dữ liệu điểm:", response.statusText);
+            return;
+        }
+
+        const studentGrades = await response.json();
+        
+        // Hiển thị điểm học sinh ở bảng tổng hợp
+        showGradesInTable(studentGrades);
+        showGradesInDetailTable(studentGrades);
+
+    } catch (error) {
+        console.error("Lỗi khi gọi API:", error);
+    }
+}
+
+// Hàm hiển thị điểm học sinh ở bảng tổng hợp
+function showGradesInTable(grades) {
+    const tbody = document.querySelector('.grade-table tbody');
+    tbody.innerHTML = ''; // Xóa dữ liệu cũ
+
+    grades.forEach((grade, index) => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${grade.stu_id}</td>
+            <td>${grade.stu_name}</td>
+            <td>${grade.gc_name === "15 mins" ? grade.stug_grade : ''}</td>
+            <td>${grade.gc_name === "Giữa kỳ" ? grade.stug_grade : ''}</td>
+            <td>${grade.gc_name === "Cuối kỳ" ? grade.stug_grade : ''}</td>
+            <td>${calculateAverageGrade(grade.stug_grade, grade.gc_weight)}</td>
+        `;
+        
+        tbody.appendChild(row);
+    });
+}
+
+// Hàm hiển thị điểm chi tiết
+function showGradesInDetailTable(grades) {
+    const tbody = document.querySelector('.detailed-table tbody');
+    tbody.innerHTML = ''; // Xóa dữ liệu cũ
+
+    grades.forEach((grade, index) => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${grade.stu_id}</td>
+            <td>${grade.stu_name}</td>
+            <td>${grade.gc_name === "15 mins" ? grade.stug_grade : ''}</td>
+            <td>${grade.gc_name === "Giữa kỳ" ? grade.stug_grade : ''}</td>
+            <td>${grade.gc_name === "Cuối kỳ" ? grade.stug_grade : ''}</td>
+            <td>${calculateAverageGrade(grade.stug_grade, grade.gc_weight)}</td>
+        `;
+        
+        tbody.appendChild(row);
+    });
+}
+
+// Hàm tính điểm trung bình
+function calculateAverageGrade(grade, weight) {
+    return (grade * weight) / 100;
+}
+
+// Lắng nghe sự kiện chọn lớp và môn học
+document.getElementById("class-selector").addEventListener("change", function () {
+    const classId = this.value;
+    const subjectId = document.getElementById("subject-selector").value;
+    loadStudentGrades(classId, subjectId);
+});
+
+document.getElementById("subject-selector").addEventListener("change", function () {
+    const subjectId = this.value;
+    const classId = document.getElementById("class-selector").value;
+    loadStudentGrades(classId, subjectId);
+});
