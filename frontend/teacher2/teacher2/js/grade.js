@@ -1,31 +1,84 @@
-// File: js/grade.js
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', async function () {
     console.log("Trang đã load xong!");
+
     const classSelector = $("#class-selector");
-    console.log("Tồn tại #class-selector?", classSelector.length > 0);
-    loadClasses('class-selector');
-    // Lấy thông tin giáo viên từ localStorage
-    const firstClassId = $("#class-selector").val();
+    const subjectSelector = $("#subject-selector");
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = localStorage.getItem("jwtToken");
 
-    if (firstClassId && userInfo && userInfo.role === "teacher") {
-        loadSubjectsByClassAndTeacher(firstClassId, userInfo.id);
-    }
-});
-$("#class-selector").on("change", function () {
-    const classId = $(this).val();
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-    console.log("Lớp được chọn:", classId);
-    console.log("Thông tin giáo viên:", userInfo);
-
-    if (!userInfo || userInfo.role !== "teacher") {
+    if (!userInfo || userInfo.role !== "teacher" || !token) {
         console.error("Người dùng không phải giáo viên hoặc chưa đăng nhập.");
+        alert("Bạn chưa đăng nhập hoặc không có quyền truy cập.");
         return;
     }
 
-    loadSubjectsByClassAndTeacher(classId, userInfo.id);
+    // Tải danh sách lớp và bind sự kiện sau khi có dữ liệu
+    await loadClasses('class-selector', token);
+
+    // Gán sự kiện khi chọn lớp -> load môn học tương ứng
+    classSelector.on("change", function () {
+        const classId = $(this).val();
+        console.log("Lớp được chọn:", classId);
+        loadSubjectsByClassAndTeacher(classId, userInfo.id);
+        loadStudentsByClass(classId);
+    });
+
+    // Gọi sự kiện thay đổi để load môn học của lớp đầu tiên
+    classSelector.trigger("change");
+
+    // Xử lý tìm kiếm học sinh
+    const searchInput = document.querySelector('.search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.grade-table tbody tr');
+
+            rows.forEach(row => {
+                const studentName = row.children[2].textContent.toLowerCase();
+                const studentId = row.children[1].textContent.toLowerCase();
+                row.style.display = (studentName.includes(searchValue) || studentId.includes(searchValue)) ? '' : 'none';
+            });
+        });
+    }
 });
+
+async function loadClasses(selectId, token) {
+    try {
+        const response = await fetch("https://localhost:7241/api/TeacherSubjectClass/getClassesByTeacher", {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        if (!response.ok) {
+            console.error("Lỗi khi lấy danh sách lớp:", response.statusText);
+            alert("Không thể tải danh sách lớp.");
+            return;
+        }
+
+        const classes = await response.json();
+        console.log("Danh sách lớp:", classes);
+
+        const select = document.getElementById(selectId);
+        if (!select) return;
+
+        select.innerHTML = '';
+        classes.forEach(c => {
+            const option = document.createElement('option');
+            option.value = c.classId;
+            option.textContent = c.className;
+            select.appendChild(option);
+        });
+
+        // Load học sinh lớp đầu tiên nếu có
+        // if (classes.length > 0) {
+        //     loadStudentsByClass(classes[0].classId);
+        // }
+
+    } catch (error) {
+        console.error("Lỗi khi load lớp:", error);
+    }
+}
 
 function loadSubjectsByClassAndTeacher(classId, teacherId) {
     if (!classId || !teacherId) {
@@ -40,7 +93,7 @@ function loadSubjectsByClassAndTeacher(classId, teacherId) {
         url: apiUrl,
         method: "GET",
         success: function (subjects) {
-            console.log("Danh sách môn học nhận được:", subjects);
+            console.log("Danh sách môn học:", subjects);
             const subjectSelector = $("#subject-selector");
             subjectSelector.empty();
 
@@ -48,115 +101,16 @@ function loadSubjectsByClassAndTeacher(classId, teacherId) {
                 subjectSelector.append(`<option value="">Không có môn học</option>`);
             } else {
                 subjects.forEach(subject => {
-                    subjectSelector.append(`<option value="${subject.SubjectId}">${subject.SubjectName}</option>`);
+                    subjectSelector.append(`<option value="${subject.subjectId}">${subject.subjectName}</option>`);
                 });
             }
         },
-        error: function () {
-            console.error("Lỗi khi tải danh sách môn học.");
+        error: function (xhr) {
+            console.error("Lỗi khi load môn học:", xhr.status, xhr.responseText);
         }
     });
 }
 
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Lấy các phần tử DOM cần tương tác
-    const classSelector = document.getElementById('class-selector');
-    const subjectSelector = document.getElementById('subject-selector');
-    const semesterTabs = document.querySelectorAll('.semester-tab');
-    const saveButton = document.getElementById('save-grades-btn');
-    const searchInput = document.querySelector('.search-input');
-
-
-    // Xử lý tìm kiếm học sinh
-    if (searchInput) {
-        searchInput.addEventListener('input', function () {
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('.grade-table tbody tr');
-
-            rows.forEach(row => {
-                const studentName = row.children[2].textContent.toLowerCase();
-                const studentId = row.children[1].textContent.toLowerCase();
-
-                if (studentName.includes(searchValue) || studentId.includes(searchValue)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    }
-});
-
-
-// Hàm tải danh sách học sinh theo lớp
-async function loadClasses(selectId) {
-    try {
-        // Lấy token từ localStorage
-        const token = localStorage.getItem("jwtToken");
-        if (!token) {
-            console.error("Không tìm thấy token, vui lòng đăng nhập lại.");
-            alert("Bạn chưa đăng nhập!");
-            return;
-        }
-
-        // Gọi API để lấy danh sách lớp của giáo viên
-        const response = await fetch("https://localhost:7241/api/TeacherSubjectClass/getClassesByTeacher", {
-            headers: {
-                "Authorization": "Bearer " + token
-            }
-        });
-
-        console.log("Response status:", response.status);
-        if (!response.ok) {
-            console.error(`Lỗi khi load danh sách lớp: ${response.status} - ${response.statusText}`);
-            alert("Không thể tải danh sách lớp. Vui lòng thử lại!");
-            return;
-        }
-
-        // Chuyển dữ liệu sang JSON
-        const classes = await response.json();
-        console.log("Danh sách lớp nhận được:", classes);
-
-        // Kiểm tra nếu không có lớp nào
-        if (classes.length === 0) {
-            alert("Bạn chưa có lớp học nào.");
-            return;
-        }
-
-        // Tìm phần tử <select> để hiển thị danh sách lớp
-        const select = document.getElementById(selectId);
-        if (!select) {
-            console.error(`Không tìm thấy phần tử select với id: ${selectId}`);
-            return;
-        }
-
-        select.innerHTML = ''; // Xóa danh sách cũ
-       
-        // Thêm danh sách lớp vào <select>
-        classes.forEach(c => {
-            const option = document.createElement('option');
-            option.value = c.classId;  // ID lớp học
-            option.textContent = c.className; // Hiển thị tên lớp
-            select.appendChild(option);
-        });
-
-        // Tự động tải danh sách sinh viên của lớp đầu tiên
-        if (classes.length > 0) {
-            loadStudentsByClass(classes[0].classId);
-        }
-
-        // Sự kiện thay đổi lớp học -> Load sinh viên mới
-        select.addEventListener('change', function () {
-            loadStudentsByClass(this.value);
-        });
-
-    } catch (error) {
-        console.error('Lỗi khi load danh sách lớp:', error);
-        alert("Đã xảy ra lỗi khi tải danh sách lớp.");
-    }
-}
 
 async function loadStudentsByClass(classId) {
     try {
