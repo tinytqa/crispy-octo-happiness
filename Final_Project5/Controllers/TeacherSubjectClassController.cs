@@ -51,6 +51,31 @@ namespace Final_Project5.Controllers
                 return BadRequest("An error occurred when showing the table!");
             }
         }
+        [HttpGet]
+        [Route("get-subjects")]
+        public IActionResult GetSubjectsByClassAndTeacher(string classId, string teacherId)
+        {
+            try
+            {
+                var subjects = SLL1.TblTeacherSubjectClasses
+                    .Where(tsc => tsc.TscCId == classId && tsc.TscTsj.TsjTId == teacherId)
+                    .Include(tsc => tsc.TscTsj.TsjSj)
+                    .Select(tsc => new
+                    {
+                        SubjectId = tsc.TscTsj.TsjSj.SjId,
+                        SubjectName = tsc.TscTsj.TsjSj.SjName
+                    })
+                    .Distinct()
+                    .ToList();
+
+                return Ok(subjects);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Lỗi khi lấy danh sách môn học.");
+            }
+        }
+
         [Authorize]
         [HttpGet("getClassesByTeacher")]
         public IActionResult GetClassesByTeacher()

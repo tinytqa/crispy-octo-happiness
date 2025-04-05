@@ -458,6 +458,27 @@
   },
   {
     "ContainingType": "Final_Project5.Controllers.StudentGradeController",
+    "Method": "GetStudentGrades",
+    "RelativePath": "api/StudentGrade/grades",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "subjectId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final_Project5.Controllers.StudentGradeController",
     "Method": "Insert",
     "RelativePath": "api/StudentGrade/insert",
     "HttpMethod": "POST",
@@ -476,6 +497,32 @@
       },
       {
         "Name": "gcID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final_Project5.Controllers.StudentGradeController",
+    "Method": "SaveMultiple",
+    "RelativePath": "api/StudentGrade/save-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "gcIDs",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "grades",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -820,6 +867,27 @@
       {
         "Name": "id",
         "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final_Project5.Controllers.TeacherSubjectClassController",
+    "Method": "GetSubjectsByClassAndTeacher",
+    "RelativePath": "api/TeacherSubjectClass/get-subjects",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],

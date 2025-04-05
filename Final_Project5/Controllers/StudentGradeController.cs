@@ -35,6 +35,69 @@ namespace Final_Project5.Controllers
                 return BadRequest("An error occurred when showing the table!");
             }
         }
+        [HttpGet("grades")]
+        public async Task<IActionResult> GetStudentGrades(string classId, string subjectId)
+        {
+            // Lấy danh sách điểm của học sinh theo lớp và môn học
+            var studentGrades = await SLL1.TblStudentGrades
+                .Include(sg => sg.StugStu)  // Liên kết với bảng học sinh
+                .Include(sg => sg.StugGc)   // Liên kết với bảng GradeComponent
+                .ThenInclude(gc => gc.GcSj)  // Liên kết bảng GradeComponent với bảng Subject
+                .Where(sg => sg.StugStu.StuCId == classId && sg.StugGc.GcSjId == subjectId)  // Lọc theo lớp và môn học
+                .Select(sg => new
+                {
+                    stu_id = sg.StugStu.StuId,
+                    stu_name = sg.StugStu.StuName,
+                    gc_name = sg.StugGc.GcName,
+                    stug_grade = sg.StugGrade,
+                    gc_weight = sg.StugGc.GcWeight,
+                    finalGrade = sg.StugGrade // Có thể tính toán điểm cuối kỳ ở đây nếu cần
+                })
+                .ToListAsync();
+
+            // Nếu không có dữ liệu điểm, trả về lỗi 404
+            if (studentGrades == null || studentGrades.Count == 0)
+            {
+                return NotFound("Không có dữ liệu điểm.");
+            }
+
+            // Trả về dữ liệu điểm học sinh
+            return Ok(studentGrades);
+        }
+
+
+        [HttpPost("save-multiple")]
+        public IActionResult SaveMultiple(
+    [FromQuery] string sID,
+    [FromQuery] string gcIDs, // "GC15P,GC15M"
+    [FromQuery] string grades // "8,9"
+)
+        {
+            try
+            {
+                var gcIdList = gcIDs.Split(',');
+                var gradeList = grades.Split(',').Select(int.Parse).ToList();
+
+                for (int i = 0; i < gcIdList.Length; i++)
+                {
+                    var grade = new TblStudentGrade
+                    {
+                        StugId = Guid.NewGuid(),
+                        StugStuId = sID,
+                        StugGcId = gcIdList[i],
+                        StugGrade = gradeList[i]
+                    };
+                    SLL1.TblStudentGrades.Add(grade);
+                }
+
+                SLL1.SaveChanges();
+                return Ok("Inserted multiple successfully!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error: " + ex.Message);
+            }
+        }
 
         [HttpPost]
         [Route("insert")]
