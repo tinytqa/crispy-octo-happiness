@@ -22,7 +22,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         loadSubjectsByClassAndTeacher(classId, userInfo.id);
         loadStudentsByClass(classId);
         // Gọi API để tải điểm học sinh
-        loadStudentGrades(classId, subjectSelector.val());
+        setTimeout(() => {
+            const newSubjectId = subjectSelector.val();
+            if (newSubjectId) {
+                showGrades(classId, newSubjectId);
+            }
+        }, 500);
     });
 
     // Gọi sự kiện thay đổi để load môn học của lớp đầu tiên
@@ -159,7 +164,6 @@ function loadSubjectsByClassAndTeacher(classId, teacherId) {
     });
 }
 
-
 async function loadStudentsByClass(classId) {
     try {
         const response = await fetch(`https://localhost:7241/api/Class/students?classId=${classId}`);
@@ -195,95 +199,426 @@ async function loadStudentsByClass(classId) {
         console.error('Lỗi khi load danh sách học sinh:', error);
     }
 }
+let gradesData = [];
 
 
-// Hàm để load điểm học sinh và hiển thị ra bảng điểm
-async function loadStudentGrades(classId, subjectId) {
+
+// async function showGrades(classId, subjectId) {
+//     try {
+//         const token = localStorage.getItem("jwtToken");
+
+//         // Lấy danh sách học sinh
+//         const studentsResponse = await fetch(`https://localhost:7241/api/Class/students?classId=${classId}`);
+//         const students = await studentsResponse.json();
+
+//         // Lấy danh sách điểm
+//         const gradesResponse = await fetch(`https://localhost:7241/api/StudentGrade/grades?classId=${classId}&subjectId=${subjectId}`, {
+//             headers: {
+//                 'Authorization': `Bearer ${token}`
+//             }
+//         });
+
+//         const gradesData = await gradesResponse.json();
+
+//         const overallTbody = document.querySelector("#overall-tab tbody");
+//         const detailTbody = document.querySelector("#detail-tab tbody");
+//         overallTbody.innerHTML = "";
+//         detailTbody.innerHTML = "";
+
+//         students.forEach((student, index) => {
+//             const stt = index + 1;
+//             const { stuId, stuName } = student;
+
+//             // Tìm thông tin điểm nếu có
+//             const gradeInfo = gradesData.find(g => g.stu_id === stuId);
+
+//             // Mặc định hiển thị input text cho những học sinh chưa có điểm
+//             let d15 = "", mid = "", final = "", finalGrade = 0;
+
+//             if (gradeInfo) {
+//                 d15 = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("15"))?.stug_grade ?? "";
+//                 mid = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("mid"))?.stug_grade ?? "";
+//                 final = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("final"))?.stug_grade ?? "";
+//                 finalGrade = gradeInfo.finalGrade ?? 0;
+//             }
+
+//             // ======= Bảng Tổng Quan =======
+//             const rowOverall = `
+//                 <tr>
+//                     <td>${stt}</td>
+//                     <td>${stuId}</td>
+//                     <td>${stuName}</td>
+//                     <td>${d15 !== "" ? d15 : '<input type="number" class="grade-input-overall" data-type="15 minutes" data-stuid="${stuId}" '}</td>
+//                     <td>${mid !== "" ? mid : '<input type="number" class="grade-input-overall" data-type="Midterm" data-stuid="${stuId}" '}</td>
+//                     <td>${final !== "" ? final : '<input type="number" class="grade-input-overall" data-type="Final" data-stuid="${stuId}" '}</td>
+//                     <td>${finalGrade ? finalGrade.toFixed(2) : "-"}</td>
+//                 </tr>
+//             `;
+//             overallTbody.insertAdjacentHTML("beforeend", rowOverall);
+
+//             // ======= Bảng Chi Tiết =======
+//             const rowDetail = `
+//                 <tr>
+//                     <td>${stt}</td>
+//                     <td>${stuId}</td>
+//                     <td>${stuName}</td>
+//                     <td><input type="number" step="0.1" class="grade-input" data-type="15 minutes" data-stuid="${stuId}" value="${d15}" placeholder="Nhập điểm"></td>
+//                     <td><input type="number" step="0.1" class="grade-input" data-type="Midterm" data-stuid="${stuId}" value="${mid}" placeholder="Nhập điểm"></td>
+//                     <td><input type="number" step="0.1" class="grade-input" data-type="Final" data-stuid="${stuId}" value="${final}" placeholder="Nhập điểm"></td>
+//                     <td>${finalGrade ? finalGrade.toFixed(2) : "-"}</td>
+//                 </tr>
+//             `;
+//             detailTbody.insertAdjacentHTML("beforeend", rowDetail);
+
+//             // Thêm sự kiện cho input trong bảng tổng quan để đồng bộ với bảng chi tiết
+//             if (d15 === "" || mid === "" || final === "") {
+//                 const overallRow = overallTbody.children[overallTbody.children.length - 1];
+//                 const detailRow = detailTbody.children[detailTbody.children.length - 1];
+                
+//                 const overallInputs = overallRow.querySelectorAll('.grade-input-overall');
+//                 const detailInputs = detailRow.querySelectorAll('.grade-input');
+                
+//                 overallInputs.forEach((input, idx) => {
+//                     input.addEventListener('input', (e) => {
+//                         detailInputs[idx].value = e.target.value;
+//                     });
+//                 });
+                
+//                 detailInputs.forEach((input, idx) => {
+//                     input.addEventListener('input', (e) => {
+//                         if (overallInputs[idx]) {
+//                             overallInputs[idx].value = e.target.value;
+//                         }
+//                     });
+//                 });
+//             }
+//         });
+
+//     } catch (error) {
+//         console.error(error);
+//         alert("Lỗi khi tải dữ liệu điểm hoặc học sinh.");
+//     }
+// }
+
+// async function saveStudentGrade() {
+//     const subjectId = $("#subject-selector").val();
+//     const classId = $("#class-selector").val();
+
+//     if (!subjectId || !classId) {
+//         alert("Vui lòng chọn lớp và môn học.");
+//         return;
+//     }
+
+//     const token = localStorage.getItem("jwtToken");
+
+//     // Lấy danh sách component để ánh xạ gc_name -> gcId
+//     let componentMap = {}; // ví dụ: { "15 minutes": "Literature_15" }
+//     try {
+//         const res = await fetch(`https://localhost:7241/api/GradeComponent/by-subject?subjectId=${subjectId}`, {
+//             headers: {
+//                 "Authorization": "Bearer " + token
+//             }
+//         });
+         
+//         const components = await res.json();
+//         components.forEach(comp => {
+//             componentMap[comp.gcName] = comp.gcId;
+//         });
+//     } catch (error) {
+//         console.error("Lỗi lấy grade components:", error);
+//         alert("Không thể tải thành phần điểm.");
+//         return;
+//     }
+
+//     // Duyệt qua từng ô điểm để gom dữ liệu
+//     const rows = document.querySelectorAll("#detail-tab .grade-input[data-stuid]");
+
+//     const gradeMap = {};
+//     rows.forEach(input => {
+//         const studentId = input.getAttribute("data-stuid");
+//         const type = input.getAttribute("data-type"); // "15 minutes", "Final", "Midterm"
+//         const grade = parseFloat(input.value);
+
+//         if (!gradeMap[studentId]) {
+//             gradeMap[studentId] = {};
+//         }
+
+//         if (!isNaN(grade)) {
+//             gradeMap[studentId][type] = grade;
+//         }
+//     });
+
+//     // Gửi điểm
+//     for (const studentId in gradeMap) {
+//         const grades = gradeMap[studentId];
+//         for (const gcName in grades) {
+//             const grade = grades[gcName];
+//             const gcId = componentMap[gcName];
+
+//             if (!gcId) {
+//                 console.warn(`Không tìm thấy gcId cho "${gcName}", bỏ qua.`);
+//                 continue;
+//             }
+
+//             try {
+//                 const response = await fetch(`https://localhost:7241/api/studentgrade/insert?sID=${studentId}&gcID=${gcId}&subjectID=${subjectId}&grade=${grade}`, {
+//                     method: "POST",
+//                     headers: {
+//                         "Authorization": "Bearer " + token
+//                     }
+//                 });
+
+//                 if (!response.ok) {
+//                     const errText = await response.text();
+//                     console.error(`Lỗi lưu điểm ${gcName} cho ${studentId}:`, errText);
+//                 } else {
+//                     console.log(`Đã lưu điểm ${gcName} cho ${studentId}`);
+//                 }
+//             } catch (err) {
+//                 console.error(`Lỗi gọi API lưu điểm cho ${studentId} (${gcName}):`, err);
+//             }
+//         }
+//     }
+
+//     alert("Lưu điểm thành công!");
+// }
+async function showGrades(classId, subjectId) {
     try {
         const token = localStorage.getItem("jwtToken");
 
-        // Gọi API để lấy điểm học sinh
-        const response = await fetch(`https://localhost:7241/api/grades?classId=${classId}&subjectId=${subjectId}`, {
+        // Lấy danh sách học sinh
+        const studentsResponse = await fetch(`https://localhost:7241/api/Class/students?classId=${classId}`);
+        const students = await studentsResponse.json();
+
+        // Lấy danh sách điểm
+        const gradesResponse = await fetch(`https://localhost:7241/api/StudentGrade/grades?classId=${classId}&subjectId=${subjectId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        let gradesData = await gradesResponse.json();
+
+        // Kiểm tra xem gradesData có phải là mảng không
+        if (!Array.isArray(gradesData)) {
+            console.warn("Dữ liệu trả về không phải là mảng, đặt lại thành []");
+            gradesData = [];
+        }
+
+        const overallTbody = document.querySelector("#overall-tab tbody");
+        const detailTbody = document.querySelector("#detail-tab tbody");
+        overallTbody.innerHTML = "";
+        detailTbody.innerHTML = "";
+
+        students.forEach((student, index) => {
+            const stt = index + 1;
+            const { stuId, stuName } = student;
+
+            // Tìm thông tin điểm nếu có
+            const gradeInfo = gradesData.find(g => g.stu_id === stuId);
+
+            // Mặc định hiển thị input text cho những học sinh chưa có điểm
+            let d15 = "", mid = "", final = "", finalGrade = 0;
+
+            if (gradeInfo) {
+                d15 = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("15"))?.stug_grade ?? "";
+                mid = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("mid"))?.stug_grade ?? "";
+                final = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("final"))?.stug_grade ?? "";
+                finalGrade = gradeInfo.finalGrade ?? 0;
+            }
+
+            // ======= Bảng Tổng Quan =======
+            const rowOverall = `
+                <tr>
+                    <td>${stt}</td>
+                    <td>${stuId}</td>
+                    <td>${stuName}</td>
+                    <td>${d15 !== "" ? d15 : '<input type="number" step="0.5" min="0" max="10" class="grade-input-overall" data-type="15 minutes" data-stuid="${stuId}" '}</td>
+                    <td>${mid !== "" ? mid : '<input type="number" step="0.5" min="0" max="10" class="grade-input-overall" data-type="Midterm" data-stuid="${stuId}" '}</td>
+                    <td>${final !== "" ? final : '<input type="number" step="0.5" min="0" max="10" class="grade-input-overall" data-type="Final" data-stuid="${stuId}" '}</td>
+                    <td>${finalGrade ? finalGrade.toFixed(2) : "-"}</td>
+                </tr>
+            `;
+            overallTbody.insertAdjacentHTML("beforeend", rowOverall);
+
+            // ======= Bảng Chi Tiết =======
+            const rowDetail = `
+                <tr>
+                    <td>${stt}</td>
+                    <td>${stuId}</td>
+                    <td>${stuName}</td>
+                    <td><input type="number" step="0.5" min="0" max="10"class="grade-input" data-type="15 minutes" data-stuid="${stuId}" value="${d15}" placeholder="Nhập điểm"></td>
+                    <td><input type="number" step="0.5" min="0" max="10" class="grade-input" data-type="Midterm" data-stuid="${stuId}" value="${mid}" placeholder="Nhập điểm"></td>
+                    <td><input type="number" step="0.5" min="0" max="10" class="grade-input" data-type="Final" data-stuid="${stuId}" value="${final}" placeholder="Nhập điểm"></td>
+                    <td>${finalGrade ? finalGrade.toFixed(2) : "-"}</td>
+                </tr>
+            `;
+            detailTbody.insertAdjacentHTML("beforeend", rowDetail);
+
+            // Thêm sự kiện cho input trong bảng tổng quan để đồng bộ với bảng chi tiết
+            if (d15 === "" || mid === "" || final === "") {
+                const overallRow = overallTbody.children[overallTbody.children.length - 1];
+                const detailRow = detailTbody.children[detailTbody.children.length - 1];
+                
+                const overallInputs = overallRow.querySelectorAll('.grade-input-overall');
+                const detailInputs = detailRow.querySelectorAll('.grade-input');
+                
+                overallInputs.forEach((input, idx) => {
+                    input.addEventListener('input', (e) => {
+                        detailInputs[idx].value = e.target.value;
+                    });
+                });
+                
+                detailInputs.forEach((input, idx) => {
+                    input.addEventListener('input', (e) => {
+                        if (overallInputs[idx]) {
+                            overallInputs[idx].value = e.target.value;
+                        }
+                    });
+                });
+            }
+        });
+
+    } catch (error) {
+        console.error(error);
+        // alert("Lỗi khi tải dữ liệu điểm hoặc học sinh.");
+    }
+}
+
+async function saveStudentGrade() {
+    const subjectId = $("#subject-selector").val();
+    const classId = $("#class-selector").val();
+
+    if (!subjectId || !classId) {
+        alert("Vui lòng chọn lớp và môn học.");
+        return;
+    }
+
+    const token = localStorage.getItem("jwtToken");
+
+    // Lấy component ID theo tên
+    let componentMap = {};
+    try {
+        const res = await fetch(`https://localhost:7241/api/GradeComponent/by-subject?subjectId=${subjectId}`, {
             headers: {
                 "Authorization": "Bearer " + token
             }
         });
 
-        // Kiểm tra nếu không có dữ liệu hoặc có lỗi
-        if (!response.ok) {
-            console.error("Lỗi khi lấy dữ liệu điểm:", response.statusText);
-            return;
-        }
-
-        const studentGrades = await response.json();
-        
-        // Hiển thị điểm học sinh ở bảng tổng hợp
-        showGradesInTable(studentGrades);
-        showGradesInDetailTable(studentGrades);
-
+        const components = await res.json();
+        components.forEach(comp => {
+            componentMap[comp.gcName] = comp.gcId;
+        });
     } catch (error) {
-        console.error("Lỗi khi gọi API:", error);
+        console.error("Lỗi lấy grade components:", error);
+        alert("Không thể tải thành phần điểm.");
+        return;
+    }
+
+    // Gom điểm theo từng học sinh
+    const rows = document.querySelectorAll("#detail-tab tbody tr");
+    const gradeMap = {}; // { "stu01": { "15 minutes": 8, "Midterm": 9, "Final": 10 } }
+    let hasInvalidGrade = false;
+
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll("input.grade-input");
+        inputs.forEach(input => {
+            const studentId = input.getAttribute("data-stuid");
+            const type = input.getAttribute("data-type");
+            const value = input.value.trim();
+
+            if (!studentId || !type || value === "") return;
+
+            // Đảm bảo định dạng số với dấu chấm thập phân
+            // Chuyển dấu phẩy thành dấu chấm nếu có
+            const normalizedValue = value.replace(",", ".");
+            const grade = parseFloat(normalizedValue);
+            
+            // Kiểm tra giá trị điểm hợp lệ (từ 0 đến 10, có thể là số thập phân)
+            if (isNaN(grade) || grade < 0 || grade > 10) {
+                alert(`Điểm của học sinh ${studentId} không hợp lệ (${value}). Vui lòng nhập giá trị từ 0 đến 10.`);
+                input.focus();
+                hasInvalidGrade = true;
+                return;
+            }
+
+            if (!gradeMap[studentId]) gradeMap[studentId] = {};
+            gradeMap[studentId][type] = grade;
+        });
+    });
+
+    // Nếu có điểm không hợp lệ, dừng việc lưu
+    if (hasInvalidGrade) return;
+
+    // Gửi lên server theo từng học sinh
+    let saveSuccess = true;
+    for (const studentId in gradeMap) {
+        const grades = gradeMap[studentId];
+
+        const gcIdList = [];
+        const gradeList = [];
+
+        for (const gcName in grades) {
+            const gcId = componentMap[gcName];
+            const grade = grades[gcName];
+
+            if (!gcId) {
+                console.warn(`Không tìm thấy gcId cho "${gcName}", bỏ qua.`);
+                continue;
+            }
+
+            gcIdList.push(gcId);
+            // Đảm bảo giá trị số được gửi đúng định dạng với dấu chấm thập phân
+            gradeList.push(grade.toString());
+        }
+       
+        if (gcIdList.length === 0) continue;
+
+        try {
+            // Sử dụng URLSearchParams để đảm bảo URL được mã hóa đúng cách
+            const params = new URLSearchParams();
+            params.append('sID', studentId);
+            params.append('gcIDs', gcIdList.join(','));
+            params.append('grades', gradeList.join(','));
+            
+            const url = `https://localhost:7241/api/studentgrade/save-multiple?${params.toString()}`;
+            console.log("URL gửi đi:", url);
+            console.log("Giá trị điểm gửi đi:", gradeList.join(','));
+            
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            });
+            
+            if (!response.ok) {
+                const errText = await response.text();
+                console.error(`Lỗi lưu điểm cho ${studentId}:`, errText);
+                saveSuccess = false;
+            } else {
+                console.log(`Đã lưu điểm cho ${studentId}`);
+            }
+        } catch (err) {
+            console.error(`Lỗi API save-multiple cho ${studentId}:`, err);
+            saveSuccess = false;
+        }
+    }
+
+    if (saveSuccess) {
+        alert("Lưu điểm thành công!");
+        showGrades(classId, subjectId);
+    } else {
+        alert("Có lỗi xảy ra khi lưu điểm. Vui lòng kiểm tra lại.");
     }
 }
 
-// Hàm hiển thị điểm học sinh ở bảng tổng hợp
-function showGradesInTable(grades) {
-    const tbody = document.querySelector('.grade-table tbody');
-    tbody.innerHTML = ''; // Xóa dữ liệu cũ
+function getExistingGrade(studentId, componentName) {
+    if (!Array.isArray(gradesData)) return null;
 
-    grades.forEach((grade, index) => {
-        const row = document.createElement('tr');
+    const studentGrade = gradesData.find(g => g.stu_id === studentId);
+    if (!studentGrade) return null;
 
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${grade.stu_id}</td>
-            <td>${grade.stu_name}</td>
-            <td>${grade.gc_name === "15 mins" ? grade.stug_grade : ''}</td>
-            <td>${grade.gc_name === "Giữa kỳ" ? grade.stug_grade : ''}</td>
-            <td>${grade.gc_name === "Cuối kỳ" ? grade.stug_grade : ''}</td>
-            <td>${calculateAverageGrade(grade.stug_grade, grade.gc_weight)}</td>
-        `;
-        
-        tbody.appendChild(row);
-    });
+    const component = studentGrade.components.find(c => c.component_name === componentName);
+    return component ? component.grade : null;
 }
-
-// Hàm hiển thị điểm chi tiết
-function showGradesInDetailTable(grades) {
-    const tbody = document.querySelector('.detailed-table tbody');
-    tbody.innerHTML = ''; // Xóa dữ liệu cũ
-
-    grades.forEach((grade, index) => {
-        const row = document.createElement('tr');
-
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${grade.stu_id}</td>
-            <td>${grade.stu_name}</td>
-            <td>${grade.gc_name === "15 mins" ? grade.stug_grade : ''}</td>
-            <td>${grade.gc_name === "Giữa kỳ" ? grade.stug_grade : ''}</td>
-            <td>${grade.gc_name === "Cuối kỳ" ? grade.stug_grade : ''}</td>
-            <td>${calculateAverageGrade(grade.stug_grade, grade.gc_weight)}</td>
-        `;
-        
-        tbody.appendChild(row);
-    });
-}
-
-// Hàm tính điểm trung bình
-function calculateAverageGrade(grade, weight) {
-    return (grade * weight) / 100;
-}
-
-// Lắng nghe sự kiện chọn lớp và môn học
-document.getElementById("class-selector").addEventListener("change", function () {
-    const classId = this.value;
-    const subjectId = document.getElementById("subject-selector").value;
-    loadStudentGrades(classId, subjectId);
-});
-
-document.getElementById("subject-selector").addEventListener("change", function () {
-    const subjectId = this.value;
-    const classId = document.getElementById("class-selector").value;
-    loadStudentGrades(classId, subjectId);
-});
