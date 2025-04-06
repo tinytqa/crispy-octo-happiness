@@ -433,9 +433,9 @@ async function showGrades(classId, subjectId) {
                     <td>${stt}</td>
                     <td>${stuId}</td>
                     <td>${stuName}</td>
-                    <td>${d15 !== "" ? d15 : '<input type="number" class="grade-input-overall" data-type="15 minutes" data-stuid="${stuId}" '}</td>
-                    <td>${mid !== "" ? mid : '<input type="number" class="grade-input-overall" data-type="Midterm" data-stuid="${stuId}" '}</td>
-                    <td>${final !== "" ? final : '<input type="number" class="grade-input-overall" data-type="Final" data-stuid="${stuId}" '}</td>
+                    <td>${d15 !== "" ? d15 : '<input type="number" step="0.5" min="0" max="10" class="grade-input-overall" data-type="15 minutes" data-stuid="${stuId}" '}</td>
+                    <td>${mid !== "" ? mid : '<input type="number" step="0.5" min="0" max="10" class="grade-input-overall" data-type="Midterm" data-stuid="${stuId}" '}</td>
+                    <td>${final !== "" ? final : '<input type="number" step="0.5" min="0" max="10" class="grade-input-overall" data-type="Final" data-stuid="${stuId}" '}</td>
                     <td>${finalGrade ? finalGrade.toFixed(2) : "-"}</td>
                 </tr>
             `;
@@ -447,9 +447,9 @@ async function showGrades(classId, subjectId) {
                     <td>${stt}</td>
                     <td>${stuId}</td>
                     <td>${stuName}</td>
-                    <td><input type="number" step="0.1" class="grade-input" data-type="15 minutes" data-stuid="${stuId}" value="${d15}" placeholder="Nhập điểm"></td>
-                    <td><input type="number" step="0.1" class="grade-input" data-type="Midterm" data-stuid="${stuId}" value="${mid}" placeholder="Nhập điểm"></td>
-                    <td><input type="number" step="0.1" class="grade-input" data-type="Final" data-stuid="${stuId}" value="${final}" placeholder="Nhập điểm"></td>
+                    <td><input type="number" step="0.5" min="0" max="10"class="grade-input" data-type="15 minutes" data-stuid="${stuId}" value="${d15}" placeholder="Nhập điểm"></td>
+                    <td><input type="number" step="0.5" min="0" max="10" class="grade-input" data-type="Midterm" data-stuid="${stuId}" value="${mid}" placeholder="Nhập điểm"></td>
+                    <td><input type="number" step="0.5" min="0" max="10" class="grade-input" data-type="Final" data-stuid="${stuId}" value="${final}" placeholder="Nhập điểm"></td>
                     <td>${finalGrade ? finalGrade.toFixed(2) : "-"}</td>
                 </tr>
             `;
@@ -481,7 +481,7 @@ async function showGrades(classId, subjectId) {
 
     } catch (error) {
         console.error(error);
-        alert("Lỗi khi tải dữ liệu điểm hoặc học sinh.");
+        // alert("Lỗi khi tải dữ liệu điểm hoặc học sinh.");
     }
 }
 
@@ -496,8 +496,8 @@ async function saveStudentGrade() {
 
     const token = localStorage.getItem("jwtToken");
 
-    // Lấy danh sách component để ánh xạ gc_name -> gcId
-    let componentMap = {}; // ví dụ: { "15 minutes": "Literature_15" }
+    // Lấy component ID theo tên
+    let componentMap = {};
     try {
         const res = await fetch(`https://localhost:7241/api/GradeComponent/by-subject?subjectId=${subjectId}`, {
             headers: {
@@ -515,67 +515,104 @@ async function saveStudentGrade() {
         return;
     }
 
-    // Duyệt qua từng ô điểm để gom dữ liệu
-    const rows = document.querySelectorAll("#detail-tab .grade-input[data-stuid]");
+    // Gom điểm theo từng học sinh
+    const rows = document.querySelectorAll("#detail-tab tbody tr");
+    const gradeMap = {}; // { "stu01": { "15 minutes": 8, "Midterm": 9, "Final": 10 } }
+    let hasInvalidGrade = false;
 
-    const gradeMap = {};
-    rows.forEach(input => {
-        const studentId = input.getAttribute("data-stuid");
-        const type = input.getAttribute("data-type"); // "15 minutes", "Final", "Midterm"
-        const grade = parseFloat(input.value);
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll("input.grade-input");
+        inputs.forEach(input => {
+            const studentId = input.getAttribute("data-stuid");
+            const type = input.getAttribute("data-type");
+            const value = input.value.trim();
 
-        if (!gradeMap[studentId]) {
-            gradeMap[studentId] = {};
-        }
+            if (!studentId || !type || value === "") return;
 
-        if (!isNaN(grade)) {
+            // Đảm bảo định dạng số với dấu chấm thập phân
+            // Chuyển dấu phẩy thành dấu chấm nếu có
+            const normalizedValue = value.replace(",", ".");
+            const grade = parseFloat(normalizedValue);
+            
+            // Kiểm tra giá trị điểm hợp lệ (từ 0 đến 10, có thể là số thập phân)
+            if (isNaN(grade) || grade < 0 || grade > 10) {
+                alert(`Điểm của học sinh ${studentId} không hợp lệ (${value}). Vui lòng nhập giá trị từ 0 đến 10.`);
+                input.focus();
+                hasInvalidGrade = true;
+                return;
+            }
+
+            if (!gradeMap[studentId]) gradeMap[studentId] = {};
             gradeMap[studentId][type] = grade;
-        }
+        });
     });
 
-    // Gửi điểm
+    // Nếu có điểm không hợp lệ, dừng việc lưu
+    if (hasInvalidGrade) return;
+
+    // Gửi lên server theo từng học sinh
+    let saveSuccess = true;
     for (const studentId in gradeMap) {
         const grades = gradeMap[studentId];
+
+        const gcIdList = [];
+        const gradeList = [];
+
         for (const gcName in grades) {
-            const grade = grades[gcName];
             const gcId = componentMap[gcName];
+            const grade = grades[gcName];
 
             if (!gcId) {
                 console.warn(`Không tìm thấy gcId cho "${gcName}", bỏ qua.`);
                 continue;
             }
 
-            // Kiểm tra điểm hiện tại của học sinh và loại điểm (GC)
-            const existingGrade = await getExistingGrade(studentId, gcId, subjectId, token);
-            if (existingGrade !== grade) {
-                // Chỉ gửi điểm nếu điểm khác với điểm hiện tại
-                try {
-                    const response = await fetch(`https://localhost:7241/api/studentgrade/insert?sID=${studentId}&gcID=${gcId}&subjectID=${subjectId}&grade=${grade}`, {
-                        method: "POST",
-                        headers: {
-                            "Authorization": "Bearer " + token
-                        }
-                    });
+            gcIdList.push(gcId);
+            // Đảm bảo giá trị số được gửi đúng định dạng với dấu chấm thập phân
+            gradeList.push(grade.toString());
+        }
+       
+        if (gcIdList.length === 0) continue;
 
-                    if (!response.ok) {
-                        const errText = await response.text();
-                        console.error(`Lỗi lưu điểm ${gcName} cho ${studentId}:`, errText);
-                    } else {
-                        console.log(`Đã lưu điểm ${gcName} cho ${studentId}`);
-                    }
-                } catch (err) {
-                    console.error(`Lỗi gọi API lưu điểm cho ${studentId} (${gcName}):`, err);
+        try {
+            // Sử dụng URLSearchParams để đảm bảo URL được mã hóa đúng cách
+            const params = new URLSearchParams();
+            params.append('sID', studentId);
+            params.append('gcIDs', gcIdList.join(','));
+            params.append('grades', gradeList.join(','));
+            
+            const url = `https://localhost:7241/api/studentgrade/save-multiple?${params.toString()}`;
+            console.log("URL gửi đi:", url);
+            console.log("Giá trị điểm gửi đi:", gradeList.join(','));
+            
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token
                 }
+            });
+            
+            if (!response.ok) {
+                const errText = await response.text();
+                console.error(`Lỗi lưu điểm cho ${studentId}:`, errText);
+                saveSuccess = false;
             } else {
-                console.log(`Điểm ${gcName} cho học sinh ${studentId} không thay đổi, bỏ qua.`);
+                console.log(`Đã lưu điểm cho ${studentId}`);
             }
+        } catch (err) {
+            console.error(`Lỗi API save-multiple cho ${studentId}:`, err);
+            saveSuccess = false;
         }
     }
 
-    alert("Lưu điểm thành công!");
+    if (saveSuccess) {
+        alert("Lưu điểm thành công!");
+        showGrades(classId, subjectId);
+    } else {
+        alert("Có lỗi xảy ra khi lưu điểm. Vui lòng kiểm tra lại.");
+    }
 }
 
-// Hàm kiểm tra điểm đã tồn tại trong cơ sở dữ liệu
 function getExistingGrade(studentId, componentName) {
     if (!Array.isArray(gradesData)) return null;
 

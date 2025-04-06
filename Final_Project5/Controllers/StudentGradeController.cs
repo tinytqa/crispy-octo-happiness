@@ -71,38 +71,97 @@ namespace Final_Project5.Controllers
         }
 
 
+        //        [HttpPost("save-multiple")]
+        //        public IActionResult SaveMultiple(
+        //    [FromQuery] string sID,
+        //    [FromQuery] string gcIDs, // "GC15P,GC15M"
+        //    [FromQuery] string grades // "8,9"
+        //)
+        //        {
+        //            try
+        //            {
+        //                var gcIdList = gcIDs.Split(',');
+        //                var gradeList = grades.Split(',').Select(int.Parse).ToList();
+
+        //                for (int i = 0; i < gcIdList.Length; i++)
+        //                {
+        //                    var grade = new TblStudentGrade
+        //                    {
+        //                        StugId = Guid.NewGuid(),
+        //                        StugStuId = sID,
+        //                        StugGcId = gcIdList[i],
+        //                        StugGrade = gradeList[i]
+        //                    };
+        //                    SLL1.TblStudentGrades.Add(grade);
+        //                }
+
+        //                SLL1.SaveChanges();
+        //                return Ok("Inserted multiple successfully!");
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                return BadRequest("Error: " + ex.Message);
+        //            }
+        //        }
         [HttpPost("save-multiple")]
         public IActionResult SaveMultiple(
-    [FromQuery] string sID,
-    [FromQuery] string gcIDs, // "GC15P,GC15M"
-    [FromQuery] string grades // "8,9"
-)
+      [FromQuery] string sID,
+      [FromQuery] string gcIDs,
+      [FromQuery] string grades
+  )
         {
             try
             {
                 var gcIdList = gcIDs.Split(',');
-                var gradeList = grades.Split(',').Select(int.Parse).ToList();
+                var gradeList = grades.Split(',').Select(g => double.Parse(g)).ToList();
+
+                if (gcIdList.Length != gradeList.Count)
+                {
+                    return BadRequest("Số lượng gcIDs và grades không khớp.");
+                }
 
                 for (int i = 0; i < gcIdList.Length; i++)
                 {
-                    var grade = new TblStudentGrade
+                    var gcId = gcIdList[i];
+                    var grade = gradeList[i];
+
+                    // ✅ Kiểm tra điểm phải nằm trong khoảng từ 0 đến 10
+                    if (grade < 0 || grade > 10)
                     {
-                        StugId = Guid.NewGuid(),
-                        StugStuId = sID,
-                        StugGcId = gcIdList[i],
-                        StugGrade = gradeList[i]
-                    };
-                    SLL1.TblStudentGrades.Add(grade);
+                        return BadRequest($"Điểm tại vị trí {i + 1} không hợp lệ: {grade}. Phải nằm trong khoảng từ 0 đến 10.");
+                    }
+
+                    var existingGrade = SLL1.TblStudentGrades
+                        .FirstOrDefault(g => g.StugStuId == sID && g.StugGcId == gcId);
+
+                    if (existingGrade != null)
+                    {
+                        existingGrade.StugGrade = grade;
+                    }
+                    else
+                    {
+                        var newGrade = new TblStudentGrade
+                        {
+                            StugId = Guid.NewGuid(),
+                            StugStuId = sID,
+                            StugGcId = gcId,
+                            StugGrade = grade
+                        };
+                        SLL1.TblStudentGrades.Add(newGrade);
+                    }
                 }
 
                 SLL1.SaveChanges();
-                return Ok("Inserted multiple successfully!");
+                return Ok("Saved multiple successfully!");
             }
             catch (Exception ex)
             {
                 return BadRequest("Error: " + ex.Message);
             }
         }
+
+
+
 
         [HttpPost]
         [Route("insert")]

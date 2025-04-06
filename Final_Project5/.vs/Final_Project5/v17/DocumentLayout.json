@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\gradecomponentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\gradecomponentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\studentgradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\studentgradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\gradecomponentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\gradecomponentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -98,7 +98,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -110,18 +110,17 @@
               "RelativeToolTip": "Controllers\\SubjectController.cs",
               "ViewState": "AgIAAEIAAAAAAAAAAAAmwC4AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T11:00:54.526Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T11:00:54.526Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "StudentGradeController.cs",
               "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentGradeController.cs",
               "RelativeDocumentMoniker": "Controllers\\StudentGradeController.cs",
               "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentGradeController.cs",
               "RelativeToolTip": "Controllers\\StudentGradeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAYwM8AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-26T11:01:45.796Z",
               "EditorCaption": ""
@@ -136,8 +135,7 @@
               "RelativeToolTip": "Controllers\\StudentController.cs",
               "ViewState": "AgIAAEEAAAAAAAAAAAAlwEgAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T03:10:28.923Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T03:10:28.923Z"
             },
             {
               "$type": "Document",
@@ -149,8 +147,7 @@
               "RelativeToolTip": "Controllers\\ClassController.cs",
               "ViewState": "AgIAAIgAAAAAAAAAAAAIwJcAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T03:16:00.328Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T03:16:00.328Z"
             },
             {
               "$type": "Document",
@@ -162,21 +159,19 @@
               "RelativeToolTip": "Models\\TblGradeComponent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T08:34:45.293Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-05T08:34:45.293Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "GradeComponentController.cs",
               "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\GradeComponentController.cs",
               "RelativeDocumentMoniker": "Controllers\\GradeComponentController.cs",
               "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\GradeComponentController.cs",
               "RelativeToolTip": "Controllers\\GradeComponentController.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAgwEYAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAowGkAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T06:56:18.156Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-28T06:56:18.156Z"
             },
             {
               "$type": "Document",
@@ -188,8 +183,7 @@
               "RelativeToolTip": "Controllers\\LoginController.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAYwDQAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T02:33:56.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-18T02:33:56.57Z"
             },
             {
               "$type": "Document",
@@ -213,8 +207,7 @@
               "RelativeToolTip": "Models\\TblAdmin.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T14:35:20.306Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-05T14:35:20.306Z"
             },
             {
               "$type": "Document",
