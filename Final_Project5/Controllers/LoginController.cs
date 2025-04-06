@@ -63,7 +63,13 @@ namespace Final_Project5.Controllers
             {
                 code = 100,
                 msg = "Login Succesfully!",
-                token = keytoken
+                token = keytoken,
+                user = new
+                {
+                    id = a1.AId,
+                    name = a1.AName,
+                    phone = a1.AEmail
+                }
             });
 
         }
@@ -85,7 +91,7 @@ namespace Final_Project5.Controllers
                 code = 100,
                 msg = "Login Successfully!",
                 token = keytoken,
-                teacher = new
+                user = new
                 {
                     id = a1.TId,
                     name = a1.TName,
@@ -111,7 +117,13 @@ namespace Final_Project5.Controllers
             {
                 code = 100,
                 msg = "Đăng nhập thành công",
-                token = keytoken
+                token = keytoken,
+                user = new
+                {
+                    id = a1.PId,
+                    name = a1.PName,
+                    phone = a1.PPhone
+                }
             });
 
         }

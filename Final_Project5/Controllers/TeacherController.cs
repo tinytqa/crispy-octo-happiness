@@ -55,6 +55,47 @@ namespace Final_Project5.Controllers
                .ToList();
             return Ok(teachers);
         }
+
+        [HttpGet]
+        [Route("showTeacherForParent")]
+        public IActionResult ShowTeacherForParent([FromQuery] string className)
+        {
+            if (string.IsNullOrEmpty(className))
+                return BadRequest("className is required.");
+
+            var teachers = SLL1.TblTeachers
+                .Include(t => t.TblTeacherSubjects)
+                    .ThenInclude(ts => ts.TblTeacherSubjectClasses)
+                        .ThenInclude(tsc => tsc.TscC) // navigation to tblClass
+                .Include(t => t.TblTeacherSubjects)
+                    .ThenInclude(ts => ts.TsjSj)
+                .Where(t => t.TblTeacherSubjects
+                    .Any(ts => ts.TblTeacherSubjectClasses
+                        .Any(tsc => tsc.TscC.CName == className)))
+                .Select(t => new
+                {
+                    t.TId,
+                    t.TName,
+                    t.TPhone,
+                    Subjects = t.TblTeacherSubjects
+                        .Where(ts => ts.TblTeacherSubjectClasses
+                            .Any(tsc => tsc.TscC.CName == className))
+                        .Select(ts => new
+                        {
+                            ts.TsjSj.SjId,
+                            ts.TsjSj.SjName
+                        })
+                        .Distinct()
+                        .ToList()
+                })
+                .ToList();
+
+            return Ok(teachers);
+        }
+
+
+
+
         [HttpPost]
         [Route("insert")]
         public IActionResult Insert(

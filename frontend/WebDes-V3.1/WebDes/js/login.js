@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
                     // Lưu thông tin người dùng vào localStorage
                     localStorage.setItem('userInfo', JSON.stringify({
-                        id: data.teacher.id,
-                        name: data.teacher.name,
-                        phone: data.teacher.phone,
+                        id: data.user.id,
+                        name: data.user.name,
+                        phone: data.user.phone,
                         role: role // Giá trị role lấy từ select box
                     }));
             

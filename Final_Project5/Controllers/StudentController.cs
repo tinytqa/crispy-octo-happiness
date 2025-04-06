@@ -136,5 +136,39 @@ namespace Final_Project5.Controllers
                 return BadRequest("An error occurred when delete a Student!");
             }
         }
+
+        [HttpGet]
+        [Route("classnameByParent")]
+        public IActionResult GetClassNameByParent([FromQuery] string parentId)
+        {
+            if (string.IsNullOrEmpty(parentId))
+            {
+                return BadRequest("Parent ID is required.");
+            }
+
+            try
+            {
+                var result = SLL1.TblStudents
+                    .Include(s => s.StuC)
+                    .Where(s => s.StuPId == parentId)
+                    .Select(s => new
+                    {
+                        ClassName = s.StuC.CName
+                    })
+                    .ToList();
+
+                if (result.Count == 0)
+                {
+                    return NotFound("No students found for this parent.");
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while fetching the class name(s).");
+            }
+        }
+
     }
 }
