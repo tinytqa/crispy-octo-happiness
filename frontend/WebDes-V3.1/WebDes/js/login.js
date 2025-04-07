@@ -48,12 +48,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (isValid) {
             loginButton.classList.add('loading');
-            loginButton.innerHTML = '<span class="login-icon"></span> Đang đăng nhập...';
+            loginButton.innerHTML = '<span class="login-icon"></span> Loging in...';
 
             // Get phone and password values
             const phone = phoneInput.value.trim();
             const pass = password.value.trim();
             const role = document.getElementById('role').value; // Get the selected role
+            if (role != 'admin' && role != 'parent' && role != 'teacher'){
+                window.alert("You haven't chose role!");
+                return;
+            }
 
             // Determine the login URL based on the selected role
             let loginUrl = '';
@@ -75,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 loginButton.classList.remove('loading');
-                loginButton.innerHTML = '<span class="login-icon"></span> Đăng nhập';
+                loginButton.innerHTML = '<span class="login-icon"></span> Log In';
             
                 if (data.token) {
                     // Lưu token vào localStorage
@@ -103,14 +107,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }, 1000);
                 } else {
-                    alert('Đăng nhập thất bại: ' + data.msg);
+                    alert(data.msg);
                 }
             })
             
             .catch(error => {
                 loginButton.classList.remove('loading');
-                loginButton.innerHTML = '<span class="login-icon"></span> Đăng nhập';
-                alert('Lỗi kết nối: ' + error.message);
+                loginButton.innerHTML = '<span class="login-icon"></span> Log In';
+                alert(error.message);
             });
         }
     });

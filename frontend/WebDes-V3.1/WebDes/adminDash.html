@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ thống Quản lý Giáo dục</title>
+    <title>School Management System</title>
     <!-- Thêm Font Awesome để sử dụng icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/adminDash.css">
@@ -22,7 +22,7 @@
         <!-- Container logo và title -->
         <div class="logo-container">
             <img src="img\school.png" alt="Logo Trường" class="logo">
-            <div class="header-title">Admin Dashboard</div>
+            <div class="header-title">Admin</div>
         </div>
 
         <!-- Icon tài khoản hình tròn góc phải -->
@@ -32,17 +32,17 @@
             </div>
             <!-- Menu dropdown -->
             <div class="account-dropdown" id="account-dropdown">
-                <a href="profile.html" class="dropdown-item">
-                    <i class="fas fa-user-circle"></i> Thông tin cá nhân
+                <a class="dropdown-item">
+                    <i class="fas fa-user-circle"></i> Personal Information
                 </a>
-                <a href="settings.html" class="dropdown-item">
-                    <i class="fas fa-cog"></i> Cài đặt tài khoản
+                <a class="dropdown-item">
+                    <i class="fas fa-cog"></i> Setting
                 </a>
-                <a href="password.html" class="dropdown-item">
-                    <i class="fas fa-key"></i> Đổi mật khẩu
+                <a class="dropdown-item">
+                    <i class="fas fa-key"></i> Change Password
                 </a>
-                <a href="login.html" class="dropdown-item logout">
-                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                <a id="logoutbtn" class="dropdown-item logout">
+                    <i class="fas fa-sign-out-alt"></i> Log out
                 </a>
             </div>
         </div>
@@ -65,51 +65,51 @@
                 <li class="nav-item active" data-page="monhoc.html" data-icon="fa-book">
                     <span>
                         <i class="fas fa-book"></i>
-                        <span class="item-text">Môn học</span>
+                        <span class="item-text">Subject Management</span>
                     </span>
-                    <div class="tooltip">Môn học</div>
+                    <div class="tooltip">Subject Management</div>
                 </li>
                 <li class="nav-item" data-page="giaovien.html" data-icon="fa-chalkboard-teacher">
                     <span>
                         <i class="fas fa-chalkboard-teacher"></i>
-                        <span class="item-text">Giáo viên</span>
+                        <span class="item-text">Teacher Management</span>
                     </span>
-                    <div class="tooltip">Giáo viên</div>
+                    <div class="tooltip">Teacher Management</div>
                 </li>
                 <li class="nav-item" data-page="hocsinh.html" data-icon="fa-user-graduate">
                     <span>
                         <i class="fas fa-user-graduate"></i>
-                        <span class="item-text">Học sinh</span>
+                        <span class="item-text">Student Management</span>
                     </span>
-                    <div class="tooltip">Học sinh</div>
+                    <div class="tooltip">Student Management</div>
                 </li>
                 <li class="nav-item" data-page="phuhuynh.html" data-icon="fa-users">
                     <span>
                         <i class="fas fa-users"></i>
-                        <span class="item-text">Phụ huynh</span>
+                        <span class="item-text">Parent Management</span>
                     </span>
-                    <div class="tooltip">Phụ huynh</div>
+                    <div class="tooltip">Parent Management</div>
                 </li>
                 <li class="nav-item" data-page="lop.html" data-icon="fa-door-open">
                     <span>
                         <i class="fas fa-door-open"></i>
-                        <span class="item-text">Lớp</span>
+                        <span class="item-text">Classes Management</span>
                     </span>
-                    <div class="tooltip">Lớp</div>
+                    <div class="tooltip">Classes Management</div>
                 </li>
                 <li class="nav-item" data-page="phanconggiaovien.html" data-icon="fa-tasks">
                     <span>
                         <i class="fas fa-tasks"></i>
-                        <span class="item-text">Phân công giáo viên</span>
+                        <span class="item-text">Assign class for teacher</span>
                     </span>
-                    <div class="tooltip">Phân công giáo viên</div>
+                    <div class="tooltip">Assign class for teacher</div>
                 </li>
             </ul>
         </nav>
 
         <div class="main-content">
             <!-- Tiêu đề của trang hiện tại với icon -->
-            <h1 class="content-header"><i class="fas fa-book"></i> Môn học</h1>
+            <h1 class="content-header"><i class="fas fa-book"></i>Subject Management</h1>
 
             <!-- iframe để hiển thị nội dung tương ứng -->
             <iframe id="content-frame" class="content-frame" src="monhoc.html"></iframe>
@@ -118,8 +118,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            const token = localStorage.getItem("jwtToken");
+
+            if (!userInfo || userInfo.role !== "admin" || !token) {
+                console.error("Người dùng không phải giáo viên hoặc chưa đăng nhập.");
+                alert("You haven't log in or not logging in as admin");
+                window.location.href = "../../../WebDes-V3.1/WebDes/login.html"; // Điều hướng về trang đăng nhập
+            }
             // Lấy thông tin người dùng từ localStorage
-            const userInfo = localStorage.getItem('userInfo');
+            var userInfo = localStorage.getItem('userInfo');
 
             if (userInfo) {
                 const user = JSON.parse(userInfo);
@@ -176,6 +184,16 @@
                 // Load content in iframe
                 $('#content-frame').attr('src', pageToLoad);
             });
+
+            $("#logoutbtn").click(function() {
+                if (confirm("Log out?")){
+                    localStorage.removeItem('jwtToken');
+                    localStorage.removeItem('userInfo');
+                    window.location.href = "../../../WebDes-V3.1/WebDes/login.html"; // Điều hướng về trang đăng nhập
+                    console.log(window.location.href);
+                    console.log(window.location.pathname);
+                }
+            })
         });
     </script>
 </body>

@@ -81,7 +81,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 document.addEventListener('DOMContentLoaded', function() {
     // Lấy thông tin người dùng từ localStorage
-    const userInfo = localStorage.getItem('userInfo');
+    var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = localStorage.getItem("jwtToken");
+
+    if (!userInfo || userInfo.role !== "parent" || !token) {
+        console.error("Người dùng không phải giáo viên hoặc chưa đăng nhập.");
+        alert("You haven't log in or not logging in as parent");
+        window.location.href = "../../../WebDes-V3.1/WebDes/login.html"; // Điều hướng về trang đăng nhập
+    }
+    var userInfo = localStorage.getItem('userInfo');
 
     if (userInfo) {
         const user = JSON.parse(userInfo);

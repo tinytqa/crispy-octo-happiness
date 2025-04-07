@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phân Công Giáo Viên</title>
+    <title>Assign Class For Teacher</title>
     <link rel="stylesheet" href="css/giaovien.css">
     <link rel="stylesheet" href="css/phancong.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -12,45 +12,45 @@
 
 <body>
     <div class="container">
-        <button id="showAddAssignmentButton" onclick="showAddAssignmentForm()">Thêm Phân Công Mới</button>
+        <button id="showAddAssignmentButton" onclick="showAddAssignmentForm()">Assigning new...</button>
         
         <!-- Phần lọc và hiển thị phân công -->
         <div class="filter-section">
             <div>
-                <label for="teacherFilter">Giáo viên:</label>
+                <label for="teacherFilter">Teacher:</label>
                 <select id="teacherFilter">
-                    <option value="">Tất cả giáo viên</option>
+                    <option value="">All teachers</option>
                     <!-- Sẽ được điền bằng JavaScript -->
                 </select>
             </div>
             
             <div>
-                <label for="classFilter">Lớp:</label>
+                <label for="classFilter">Class:</label>
                 <select id="classFilter">
-                    <option value="">Tất cả lớp</option>
+                    <option value="">All classes</option>
                     <!-- Sẽ được điền bằng JavaScript -->
                 </select>
             </div>
             
             <div>
-                <label for="subjectFilter">Môn học:</label>
+                <label for="subjectFilter">Subject:</label>
                 <select id="subjectFilter">
-                    <option value="">Tất cả môn</option>
+                    <option value="">All subjects</option>
                     <!-- Sẽ được điền bằng JavaScript -->
                 </select>
             </div>
             
-            <button onclick="applyFilters()">Lọc</button>
+            <button onclick="applyFilters()">Filter</button>
         </div>
 
         <!-- Bảng phân công -->
         <table class="assignment-table">
             <thead>
                 <tr>
-                    <th>Giáo viên</th>
-                    <th>Lớp</th>
-                    <th>Môn học</th>
-                    <th>Thao tác</th>
+                    <th>Teacher</th>
+                    <th>Class</th>
+                    <th>Subject</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody id="assignmentList">
@@ -64,10 +64,10 @@
         <div class="popup-content">
             <span class="close-btn" onclick="hideAssignmentForm()">&times;</span>
             <div class="form-section">
-                <h2 id="formTitle">Thêm Phân Công Mới</h2>
+                <h2 id="formTitle">Assigning new...</h2>
                 
                 <div class="input-group">
-                    <label for="teacherSelect">Giáo viên:</label>
+                    <label for="teacherSelect">Teacher:</label>
                     <select id="teacherSelect" required>
                         <!-- <option value="">Chọn giáo viên</option> -->
                         <!-- Sẽ được điền bằng JavaScript -->
@@ -75,9 +75,9 @@
                 </div>
                 
                 <div class="input-group">
-                    <label for="classSelect">Lớp:</label>
+                    <label for="classSelect">Class:</label>
                     <select id="classSelect" required>
-                        <option value="">Chọn lớp</option>
+                        <option value="">Choose class</option>
                         <!-- Sẽ được điền bằng JavaScript -->
                     </select>
                 </div>
@@ -92,7 +92,7 @@
                 
                 <input type="hidden" id="assignmentId">
                 <div class="button-container">
-                    <button id="submitAssignmentButton" onclick=" addAssignment()">Lưu Phân Công</button>
+                    <button id="submitAssignmentButton" onclick=" addAssignment()">Save</button>
                 </div>
             </div>
         </div>

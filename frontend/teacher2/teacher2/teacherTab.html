@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ thống Quản lý Giáo dục</title>
+    <title>School Management System</title>
     <!-- Thêm Font Awesome để sử dụng icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/teacherDash.css">
@@ -18,7 +18,7 @@
         <!-- Container logo và title -->
         <div class="logo-container">
             <img src="..\..\WebDes-V3.1\WebDes\img\school.png" alt="Logo Trường" class="logo">
-            <div class="header-title">Hệ thống Quản lý Giáo dục</div>
+            <div class="header-title">Teacher</div>
         </div>
 
         <!-- Icon tài khoản hình tròn góc phải -->
@@ -28,17 +28,17 @@
             </div>
             <!-- Menu dropdown -->
             <div class="account-dropdown" id="account-dropdown">
-                <a href="profile.html" class="dropdown-item">
-                    <i class="fas fa-user-circle"></i> Thông tin cá nhân
+                <a class="dropdown-item">
+                    <i class="fas fa-user-circle"></i> Personal Information
                 </a>
-                <a href="settings.html" class="dropdown-item">
-                    <i class="fas fa-cog"></i> Cài đặt tài khoản
+                <a class="dropdown-item">
+                    <i class="fas fa-cog"></i> Setting
                 </a>
-                <a href="password.html" class="dropdown-item">
-                    <i class="fas fa-key"></i> Đổi mật khẩu
+                <a class="dropdown-item">
+                    <i class="fas fa-key"></i> Change Password
                 </a>
-                <a onclick="logout()" class="dropdown-item logout">
-                    <i class="fas fa-sign-out-alt" onclick="logout()"></i> Đăng xuất
+                <a id="logoutbtn" class="dropdown-item logout">
+                    <i class="fas fa-sign-out-alt" onclick="logout()"></i> Log out
                 </a>
             </div>
         </div>
@@ -49,8 +49,8 @@
         <nav class="sidebar">
             <!-- Hiển thị tên người dùng -->
             <div class="user-info">
-                <div class="user-name">Đang tải...</div>
-                <div class="user-role">Giáo viên</div>
+                <div class="user-name">Loading...</div>
+                <div class="user-role">Teacher</div>
             </div>            
 
             <ul class="nav-menu">
@@ -58,13 +58,13 @@
                 <li class="nav-item active" data-page="lophoc.html" data-icon="fa-door-open">
                     <span>
                         <i class="fas fa-door-open"></i> 
-                        <span class="item-text">Lớp học</span>
+                        <span class="item-text">Classes</span>
                     </span>
                 </li>
                 <li class="nav-item" data-page="nhapdiem.html" data-icon="fa-edit">
                     <span>
                         <i class="fas fa-edit"></i> 
-                        <span class="item-text">Nhập điểm</span>
+                        <span class="item-text">Grade Management</span>
                     </span>
                 </li>
             </ul>
@@ -72,11 +72,24 @@
 
         <div class="main-content">
             <!-- Tiêu đề của trang hiện tại với icon -->
-            <h1 class="content-header"><i class="fas fa-door-open"></i> Lớp học</h1>
+            <h1 class="content-header"><i class="fas fa-door-open"></i>Classes</h1>
 
             <!-- iframe để hiển thị nội dung tương ứng -->
             <iframe id="content-frame" class="content-frame" src="lophoc.html"></iframe>
         </div>
     </div>
 </body>
+<script>
+        $(document).ready(function(){
+        $("#logoutbtn").click(function() {
+            if (confirm("Log out?")){
+                localStorage.removeItem('jwtToken');
+                localStorage.removeItem('userInfo');
+                window.location.href = "../../../WebDes-V3.1/WebDes/login.html"; // Điều hướng về trang đăng nhập
+                console.log(window.location.href);
+                console.log(window.location.pathname);
+            }
+        })
+    })
+</script>
 </html>

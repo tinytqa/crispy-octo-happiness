@@ -28,9 +28,9 @@ function renderTable(data) {
                 <td>${Sclass.cName}</td>
                 <td>${Sclass.teacherName}</td>
                 <td>
-                    <button class="btn btn-info btn-sm" onclick="viewStudents('${Sclass.cId}', '${Sclass.cName}')">Xem học sinh</button>
-                    <button class="btn btn-warning btn-sm" onclick="openEditForm('${Sclass.cId}')">Sửa</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteStudent('${Sclass.cId}')">Xóa</button>
+                    <button class="btn btn-info btn-sm" onclick="viewStudents('${Sclass.cId}', '${Sclass.cName}')">View Student List</button>
+                    <button class="btn btn-warning btn-sm" onclick="openEditForm('${Sclass.cId}')">Update</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteStudent('${Sclass.cId}')">Delete</button>
                 </td>
             </tr>
         `;
@@ -63,10 +63,10 @@ async function viewStudents(classId, className) {
         }
 
         document.getElementById('studentList').innerHTML = html;
-        document.getElementById('classTitle').innerText = `Danh sách học sinh - ${className}`;
+        document.getElementById('classTitle').innerText = `Student List - ${className}`;
         document.getElementById('studentListPopup').style.display = 'flex';
     } catch (error) {
-        console.error("Lỗi khi tải danh sách học sinh:", error);
+        console.error("Error when loading student list:", error);
         alert(error.message);
     }
 }
@@ -82,7 +82,7 @@ function addClass() {
 
     // Kiểm tra thông tin đầu vào
     if (!classId || !className || !classTeacher) {
-        alert('Vui lòng điền đầy đủ thông tin lớp học.');
+        alert('Please insert all information.');
         return;
     }
 
@@ -94,13 +94,13 @@ function addClass() {
         url: `${baseUrl}/insert?${queryString}`,
         method: 'POST',
         success: function (response) {
-            alert('Thêm lớp học thành công!');
+            alert('New class added successfully!');
             loadData(); // Load lại danh sách sau khi thêm
             $('#classForm')[0].reset(); // Reset form nhập liệu
             hideAddForm(); // Ẩn popup thêm lớp học
         },
         error: function (error) {
-            alert('Lỗi khi thêm lớp học.');
+            alert('Error when add new class.');
             console.error(error);
         }
     });
@@ -118,7 +118,7 @@ function saveEdit() {
     var teacher = $('#editcbTeacher').val();
 
     if (!classId || !className || !teacher) {
-        alert('Vui lòng điền đầy đủ thông tin.');
+        alert('Please insert all information.');
         return;
     }
 
@@ -133,13 +133,13 @@ function saveEdit() {
         method: 'POST',
         contentType: 'application/x-www-form-urlencoded',
         success: function (response) {
-            alert('Cập nhật thành công!');
+            alert('Class updated successfully!');
             loadData();
             hideEditForm();
         },
         error: function (error) {
             console.error("Error:", error);
-            alert('Lỗi khi cập nhật lớp học: ' + error.responseText);
+            alert('Error when update a class: ' + error.responseText);
         }
     });
 }
@@ -147,7 +147,7 @@ async function openEditForm(classId) {
     let classItem = classesData.find(c => c.cId == classId);
 
     if (!classItem) {
-        alert('Không tìm thấy lớp học!');
+        alert('No class found!');
         return;
     }
 
@@ -165,16 +165,16 @@ function hideEditForm() {
 }
 function deleteStudent(classId) {
 
-    if (confirm('Bạn có chắc muốn xóa?')) {
+    if (confirm('Confirming delete this class?')) {
         $.ajax({
             url: `${baseUrl}/delete?id=${encodeURIComponent(classId)}`,
             method: 'DELETE',
             success: function (response) {
                 loadData();
-                alert('Xóa thành công!');
+                alert('Class deleted succesfully!');
             },
             error: function (error) {
-                alert('Lỗi khi xóa dữ liệu');
+                alert('Error when delete a class!');
                 console.error(error);
             }
         });

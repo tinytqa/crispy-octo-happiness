@@ -56,7 +56,7 @@ namespace Final_Project5.Controllers
             TblAdmin a1 = SLL1.TblAdmins.FirstOrDefault(p => p.AEmail == email && p.APassword == password);
             if (a1 == null)
             {
-                return BadRequest("Wrong email or password");
+                return BadRequest(new { code = 400, msg = "Wrong email or password" });
             }
             string keytoken = GetKey(email, password, "Admin", a1.AId);
             return Ok(new
@@ -108,7 +108,7 @@ namespace Final_Project5.Controllers
             TblParent a1 = SLL1.TblParents.FirstOrDefault(p => p.PPhone == email && p.PPassword == password);
             if (a1 == null)
             {
-                return BadRequest("Wrong email or password");
+                return BadRequest(new { code = 400, msg = "Wrong email or password" });
             }
 
             string keytoken = GetKey(email, password, "Parent", a1.PId);

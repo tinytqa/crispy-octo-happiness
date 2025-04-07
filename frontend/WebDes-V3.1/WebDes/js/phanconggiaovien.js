@@ -8,14 +8,14 @@ async function showAddAssignmentForm() {
         ]);
         const subjects = await loadSubjects();
 
-        document.getElementById('formTitle').textContent = 'Thêm Phân Công Mới';
+        document.getElementById('formTitle').textContent = 'New Assigning';
         document.getElementById('assignmentId').value = '';
         document.getElementById('teacherSelect').value = '';
         document.getElementById('classSelect').value = '';
 
         renderSubjects(subjects, 'subjectsSelect', []);
 
-        document.getElementById('submitAssignmentButton').textContent = 'Lưu Phân Công';
+        document.getElementById('submitAssignmentButton').textContent = 'Save Assigning';
         document.getElementById('assignmentPopup').style.display = 'flex';
     } catch (error) {
         console.error("Lỗi khi hiển thị form phân công:", error);
@@ -148,7 +148,7 @@ function addAssignment() {
     let checkedSubjects = $("input[name='subjectList']:checked");
 
     if (!teacherId || !classId || checkedSubjects.length === 0) {
-        alert("Vui lòng chọn đầy đủ thông tin!"); // Hiển thị thông báo
+        alert("Please insert all information and choose at least one subject."); // Hiển thị thông báo
         return;
     }
 
@@ -175,10 +175,10 @@ function addAssignment() {
 
     // Khi tất cả request hoàn thành
     $.when.apply($, requests).done(function () {
-        alert("Thêm phân công thành công!");
+        alert("Assigning for teacher succesfully!");
         location.reload(); // Reload trang để cập nhật danh sách
     }).fail(function () {
-        alert("Có lỗi xảy ra khi thêm phân công!");
+        alert("Error when assigning new class for teacher!");
     });
 }
 
@@ -205,7 +205,7 @@ function renderAssignments(data) {
             <td>${assignment.className}</td>
             <td>${assignment.subjectName}</td>
             <td>
-                <button class="btn btn-danger btn-sm" onclick="deleteAssignment('${assignment.tscId}')">Xóa</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteAssignment('${assignment.tscId}')">Delete</button>
             </td>
         </tr>
         `;
@@ -217,16 +217,16 @@ $(document).ready(function () {
 
 });
 function deleteAssignment(assignmentId) {
-    if (confirm('Bạn có chắc muốn xóa?')) {
+    if (confirm('Confirming delete?')) {
         $.ajax({
             url: `${baseUrl}/delete?id=${encodeURIComponent(assignmentId)}`,
             method: 'DELETE',
             success: function (response) {
                 loadAssignments();
-                alert('Xóa thành công!');
+                alert('Delete successfully!');
             },
             error: function (error) {
-                alert('Lỗi khi xóa dữ liệu');
+                alert('Error when delete');
                 console.error(error);
             }
         });

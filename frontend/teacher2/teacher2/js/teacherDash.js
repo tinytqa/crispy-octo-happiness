@@ -86,8 +86,16 @@ function openClassDetails(className) {
     }, '*');
 }
 document.addEventListener('DOMContentLoaded', function() {
+    var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = localStorage.getItem("jwtToken");
+
+    if (!userInfo || userInfo.role !== "teacher" || !token) {
+        console.error("Người dùng không phải giáo viên hoặc chưa đăng nhập.");
+        alert("You haven't log in or not logging in as teacher");
+        window.location.href = "../../../WebDes-V3.1/WebDes/login.html"; // Điều hướng về trang đăng nhập
+    }
     // Lấy thông tin người dùng từ localStorage
-    const userInfo = localStorage.getItem('userInfo');
+    var userInfo = localStorage.getItem('userInfo');
 
     if (userInfo) {
         const user = JSON.parse(userInfo);
@@ -101,10 +109,3 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.user-role').textContent = "";
     }
 });
-function logout() {
-    localStorage.removeItem('jwtToken');
-    localStorage.removeItem('userInfo');
-    window.location.href = "../../../WebDes-V3.1/WebDes/login.html"; // Điều hướng về trang đăng nhập
-    console.log(window.location.href);
-console.log(window.location.pathname);
-}

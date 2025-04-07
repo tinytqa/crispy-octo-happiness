@@ -19,10 +19,10 @@ function fetchClassList() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Dữ liệu nhận được từ API:", data);
+        console.log("Data recieved from API:", data);
         renderClassList(data);
     })
-    .catch(error => console.error("Lỗi khi tải danh sách lớp:", error));
+    .catch(error => console.error("Error when loading classes list:", error));
 }
 
 // Hiển thị danh sách lớp
@@ -32,7 +32,7 @@ function renderClassList(classes) {
 
 
     if (classes.length === 0) {
-        classGrid.innerHTML = "<p>Không có lớp nào.</p>";
+        classGrid.innerHTML = "<p>There are no classes.</p>";
         return;
     }
 
@@ -47,11 +47,11 @@ function renderClassList(classes) {
             </div>
             <div class="class-content">
                 <div class="info-row">
-                    <span class="info-label">Môn học:</span>
+                    <span class="info-label">Subject:</span>
                     <span class="info-value">${classItem.subjectName}</span>
                 </div>
                 <button class="class-btn btn-primary" onclick="manageClass('${classItem.className}')">
-                    <i class="fas fa-list-alt"></i> Quản lý điểm
+                    <i class="fas fa-list-alt"></i> Grade Management
                 </button>
             </div>
         `;

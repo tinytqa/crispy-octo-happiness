@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ thống Quản lý Giáo dục</title>
+    <title>School Management System</title>
     <!-- Thêm Font Awesome để sử dụng icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/adminDash.css">
@@ -30,17 +30,17 @@
             </div>
             <!-- Menu dropdown -->
             <div class="account-dropdown" id="account-dropdown">
-                <a href="profile.html" class="dropdown-item">
-                    <i class="fas fa-user-circle"></i> Thông tin cá nhân
+                <a class="dropdown-item">
+                    <i class="fas fa-user-circle"></i> Personal Information
                 </a>
-                <a href="settings.html" class="dropdown-item">
-                    <i class="fas fa-cog"></i> Cài đặt tài khoản
+                <a class="dropdown-item">
+                    <i class="fas fa-cog"></i> Setting
                 </a>
-                <a href="password.html" class="dropdown-item">
-                    <i class="fas fa-key"></i> Đổi mật khẩu
+                <a class="dropdown-item">
+                    <i class="fas fa-key"></i> Change Password
                 </a>
-                <a href="..\..\WebDes-V3.1\WebDes\login.html" class="dropdown-item logout">
-                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                <a id="logoutbtn" class="dropdown-item logout">
+                    <i class="fas fa-sign-out-alt"></i> Log out
                 </a>
             </div>
         </div>
@@ -59,25 +59,38 @@
                 <!-- Các mục menu với icon phù hợp -->
 
                 <li class="nav-item" data-page="listGiaoVien.html" data-icon="fa-chalkboard-teacher">
-                    <span><i class="fas fa-chalkboard-teacher"></i> Giáo viên</span>
+                    <span><i class="fas fa-chalkboard-teacher"></i> Teacher</span>
                 </li>
                 <!-- <li class="nav-item" data-page="listHocsinh.html" data-icon="fa-user-graduate">
                     <span><i class="fas fa-user-graduate"></i> Học sinh</span>
                 </li> -->
                 <li class="nav-item" data-page="diem.html" data-icon="fa-bars">
-                    <span><i class="fas fa-bars"></i> Điểm</span>
+                    <span><i class="fas fa-bars"></i> Grade</span>
                 </li>
             </ul>
         </nav>
 
         <div class="main-content">
             <!-- Tiêu đề của trang hiện tại với icon -->
-            <h1 class="content-header"><i class="fas fa-book"></i>Giáo Viên</h1>
+            <h1 class="content-header"><i class="fas fa-book"></i>Teacher</h1>
 
             <!-- iframe để hiển thị nội dung tương ứng -->
             <iframe id="content-frame" class="content-frame" src="listGiaoVien.html"></iframe>
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function(){
+        $("#logoutbtn").click(function() {
+            if (confirm("Log out?")){
+                localStorage.removeItem('jwtToken');
+                localStorage.removeItem('userInfo');
+                window.location.href = "../../../WebDes-V3.1/WebDes/login.html"; // Điều hướng về trang đăng nhập
+                console.log(window.location.href);
+                console.log(window.location.pathname);
+            }
+        })
+    })
+</script>
 
 </html>

@@ -37,8 +37,8 @@ function renderTable(data) {
                 <td>${teacher.tPassword}</td>
                 <td>${subjects}</td> 
                 <td>
-                    <button class="btn btn-warning btn-sm" onclick="openEditForm('${teacher.tId}')">Sửa</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteTeacher('${teacher.tId}')">Xóa</button>
+                    <button class="btn btn-warning btn-sm" onclick="openEditForm('${teacher.tId}')">Update</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteTeacher('${teacher.tId}')">Delete</button>
                 </td>
             </tr>
         `;
@@ -58,7 +58,7 @@ function addTeacher() {
     });
 
     if (!teacherId || !teacherName || !teacherPhone || !teacherPassword || selectedSubjects.length === 0) {
-        alert('Vui lòng điền đầy đủ thông tin và chọn ít nhất một môn học.');
+        alert('Please insert all information and choose at least one subject.');
         return;
     }
 
@@ -68,13 +68,13 @@ function addTeacher() {
         url: `${baseUrl}/insert?id=${encodeURIComponent(teacherId)}&name=${encodeURIComponent(teacherName)}&phone=${encodeURIComponent(teacherPhone)}&pw=${encodeURIComponent(teacherPassword)}&subjects=${encodeURIComponent(subjectsQuery)}`,
         method: 'POST',
         success: function (response) {
-            alert('Thêm giáo viên thành công!');
+            alert('New teacher added succesfully!');
             loadData();
             $('#teacherForm')[0].reset();
             hideAddForm();
         },
         error: function (error) {
-            alert('Lỗi khi thêm giáo viên.');
+            alert('Error when adding new teacher.');
             console.error(error);
         }
     });
@@ -143,7 +143,7 @@ function saveEditTeacher() {
     });
 
     if (!teacherId || !teacherName || !teacherPhone || !teacherPassword || selectedSubjects.length === 0) {
-        alert('Vui lòng điền đầy đủ thông tin và chọn ít nhất một môn học.');
+        alert('Please insert all information and choose at least one subject.');
         return;
     }
 
@@ -156,12 +156,12 @@ function saveEditTeacher() {
         url: requestUrl,
         method: 'POST',
         success: function (response) {
-            alert('Cập nhật thành công!');
+            alert('Teacher information updated succesfully!');
             loadData();
             hideEditForm();
         },
         error: function (xhr, status, error) {
-            alert(`Lỗi khi cập nhật giáo viên: ${xhr.responseText}`);
+            alert(`Error when update teacher information: ${xhr.responseText}`);
             console.error(error);
         }
     });
@@ -219,6 +219,10 @@ function renderSubjects(subjects, containerId, selectedSubjectIds = [], checkbox
 
     container.appendChild(fragment); // Chỉ thao tác DOM 1 lần
     console.count("🔥 renderSubjects() được gọi");
+}
+
+function hideAddForm() {
+    document.getElementById('addTeacherPopup').style.display = 'none';
 }
 
 function hideEditForm() {

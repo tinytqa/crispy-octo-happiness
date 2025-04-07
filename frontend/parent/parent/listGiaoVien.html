@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách giáo viên</title>
+    <title>Teacher List</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,8 +21,8 @@
 <body>
     <div class="container mt-4">
         <div class="mb-3">
-            <label for="studentSelect" class="form-label fw-bold">Chọn học sinh:</label>
-            <select id="studentSelect" class="form-select form-select-sm" aria-label="Chọn học sinh">
+            <label for="studentSelect" class="form-label fw-bold">Student Selector:</label>
+            <select id="studentSelect" class="form-select form-select-sm" aria-label="Choose student">
                 <!-- Options sẽ được thêm vào đây qua JavaScript -->
             </select>
         </div>
@@ -30,10 +30,10 @@
             <table id="teacherTable" class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Lớp</th>
-                        <th>Họ tên</th>
-                        <th>Số điện thoại</th>
-                        <th>Môn giảng dạy</th>
+                        <th>Class</th>
+                        <th>Full name</th>
+                        <th>Phone number</th>
+                        <th>Educated Subject</th>
                     </tr>
                 </thead>
                 <tbody id="teacherList"></tbody>

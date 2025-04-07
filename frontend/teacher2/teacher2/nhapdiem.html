@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý điểm số</title>
+    <title>Grade Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/grade.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -12,10 +12,10 @@
 </head>
 <body>
     <div class="page-header">
-        <h2 class="page-title">Quản lý điểm số</h2>
+        <h2 class="page-title">Grade Management</h2>
         <div class="action-buttons">
             <button class="btn" id="save-grades-btn"  onclick = "saveStudentGrade()">
-               Lưu điểm
+               Save Grade
             </button>
         </div>
     </div>
@@ -23,13 +23,13 @@
     <div class="grade-header">
         <div class="class-selector-container">
             <div class="filter-group">
-                <label class="filter-label">Lớp</label>
+                <label class="filter-label">Class</label>
                 <select class="filter-select" id="class-selector">
                     
                 </select>
             </div>
             <div class="filter-group">
-                <label class="filter-label">Môn học</label>
+                <label class="filter-label">Subject</label>
                 <select class="filter-select" id="subject-selector">
                     
                 </select>
@@ -37,15 +37,15 @@
         </div>
 
         <div class="semester-tabs">
-            <button class="semester-tab active" data-semester="1">Học kỳ 1</button>
-            <button class="semester-tab" data-semester="2">Học kỳ 2</button>
+            <button class="semester-tab active" data-semester="1">Semester 1</button>
+            <button class="semester-tab" data-semester="2">Semester 2</button>
         </div>
     </div>
 
     <div class="grade-controls">
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" placeholder="Tìm kiếm học sinh...">
+            <input type="text" class="search-input" placeholder="Search by name...">
         </div>
     </div>
 
@@ -55,12 +55,12 @@
                 <thead>
                     <tr>
                         <th class="sticky-col">STT</th>
-                        <th class="sticky-col">Mã HS</th>
-                        <th class="sticky-col">Họ và tên</th>
-                        <th>15 phút</th>     
-                        <th>Giữa kỳ</th>
-                        <th>Cuối kỳ</th>
-                        <th>TB Môn</th>
+                        <th class="sticky-col">Student ID</th>
+                        <th class="sticky-col">Full name</th>
+                        <th>15 minutes</th>     
+                        <th>Midterm</th>
+                        <th>Finalterm</th>
+                        <th>Average score</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,17 +77,17 @@
                 <thead>
                     <tr>
                         <th class="sticky-col" rowspan="2">STT</th>
-                        <th class="sticky-col" rowspan="2">Mã HS</th>
-                        <th class="sticky-col" rowspan="2">Họ và tên</th>
-                        <th colspan="2">Điểm 15 phút</th>
-                        <th rowspan="2">Giữa kỳ</th>
-                        <th rowspan="2">Cuối kỳ</th>
-                        <th rowspan="2">TB Môn</th>
+                        <th class="sticky-col" rowspan="2">Student ID</th>
+                        <th class="sticky-col" rowspan="2">Full name</th>
+                        <th colspan="2">15 minutes</th>
+                        <th rowspan="2">Midterm</th>
+                        <th rowspan="2">Finalterm</th>
+                        <th rowspan="2">Average score</th>
                     </tr>
                     <tr>
-                        <th>15p</th>
-                        <th>Giữa kì</th>
-                        <th>Cuối kì</th>
+                        <th>15 minutes</th>
+                        <th>Midterm</th>
+                        <th>Finalterm</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -34,8 +34,8 @@ function renderTable(data) {
                 <td>${parent.pPassword}</td>
                 <td>${studentNames}</td> <!-- Cập nhật cách hiển thị tên học sinh -->
                 <td>
-                    <button class="btn btn-warning btn-sm" onclick="openDialog('${parent.pId}')">Sửa</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteParent('${parent.pId}')">Xóa</button>
+                    <button class="btn btn-warning btn-sm" onclick="openDialog('${parent.pId}')">Update</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteParent('${parent.pId}')">Delete</button>
                 </td>
             </tr>
         `;
@@ -54,12 +54,12 @@ function addParent() {
 
     // Kiểm tra dữ liệu đầu vào
     if (!parentId || !parentName || !parentPhone || !parentPassword) {
-        alert('Vui lòng nhập đầy đủ thông tin phụ huynh.');
+        alert('Please insert all information.');
         return;
     }
 
     if (studentIds.length === 0) {
-        alert('Vui lòng chọn ít nhất một học sinh.');
+        alert('Please choose at least one student.');
         return;
     }
 
@@ -75,7 +75,7 @@ function addParent() {
         url: `${baseUrl}/insert?${queryString}`,
         method: 'POST',
         success: function (response) {
-            alert('Thêm phụ huynh thành công!');
+            alert('New parent added successfully!');
             loadData(); // Cập nhật danh sách phụ huynh
             // Load lại danh sách học sinh
             closeStudentList();
@@ -83,8 +83,8 @@ function addParent() {
             hideAddForm();
         },
         error: function (xhr, status, error) {
-            console.error("Lỗi khi thêm phụ huynh:", xhr.responseText);
-            alert(`Lỗi khi thêm phụ huynh: ${xhr.responseText || error}`);
+            console.error("Error when adding new parent: ", xhr.responseText);
+            alert(`Error when adding new parent:  ${xhr.responseText || error}`);
         }
     });
 }
@@ -102,7 +102,7 @@ let selectedEditStudents = [];
 function openDialog(parentId) {
     let parent = parentsData.find(p => p.pId === parentId);
     if (!parent) {
-        alert("Không tìm thấy phụ huynh!");
+        alert("Parent information not found!");
         return;
     }
 
@@ -129,7 +129,7 @@ function saveEditParent() {
     var parentPassword = $('#editParentPassword').val();
 
     if (!parentId || !parentName || !parentPhone || !parentPassword) {
-        alert('Vui lòng điền đầy đủ thông tin.');
+        alert('Please insert all information.');
         return;
     }
 
@@ -151,12 +151,12 @@ function saveEditParent() {
         url: `${baseUrl}/update?${queryString}`,
         method: 'POST',
         success: function (response) {
-            alert('Cập nhật thông tin phụ huynh thành công!');
+            alert('Parent information updated successfully!');
             $('#editParentPopup').hide();
             loadData();
         },
         error: function (error) {
-            alert('Lỗi khi cập nhật thông tin phụ huynh.');
+            alert('Error when updating a parent.');
             console.error(error);
         }
     });
@@ -167,16 +167,16 @@ function hideEditForm() {
     document.getElementById('editParentPopup').style.display = 'none';
 }
 function deleteParent(parentId) {
-    if (confirm('Bạn có chắc muốn xóa?')) {
+    if (confirm('Confirming delete this parent?')) {
         $.ajax({
             url: `${baseUrl}/delete?id=${encodeURIComponent(parentId)}`,
             method: 'DELETE',
             success: function (response) {
                 loadData();
-                alert('Xóa thành công!');
+                alert('Parent deleted successfully!');
             },
             error: function (error) {
-                alert('Lỗi khi xóa dữ liệu');
+                alert('Error when delete a parent');
                 console.error(error);
             }
         });

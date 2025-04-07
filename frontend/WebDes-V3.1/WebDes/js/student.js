@@ -36,8 +36,8 @@ function renderTable(data) {
             <td>${student.className}</td>
             <td>${formattedDob}</td>
             <td>
-                <button class="btn btn-warning btn-sm" onclick="openEditForm('${student.stuId}')">Sửa</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteStudent('${student.stuId}')">Xóa</button>
+                <button class="btn btn-warning btn-sm" onclick="openEditForm('${student.stuId}')">Update</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteStudent('${student.stuId}')">Delete</button>
             </td>
         </tr>
         `;
@@ -54,7 +54,7 @@ function addStudent() {
 
     // Kiểm tra thông tin đầu vào
     if (!studentId || !studentName || !gradeLevel || !dob || !studentClass) {
-        alert('Vui lòng điền đầy đủ thông tin.');
+        alert('Please insert all information.');
         return;
     }
 
@@ -66,13 +66,13 @@ function addStudent() {
         url: `${baseUrl}/insert?${queryString}`, // Đảm bảo URL đúng
         method: 'POST',
         success: function (response) {
-            alert('Thêm học sinh thành công!');
+            alert('TNew student added successfully!');
             loadData(); // Load lại danh sách sau khi thêm
             $('#studentForm')[0].reset(); // Reset form nhập liệu
             hideAddForm(); // Ẩn popup thêm học sinh
         },
         error: function (error) {
-            alert('Lỗi khi thêm học sinh.');
+            alert('Error when adding new student.');
             console.error(error);
         }
     });
@@ -95,7 +95,7 @@ function saveEdit() {
     var studentClass = $('#editClass').val(); // Lấy giá trị class
 
     if (!studentId || !studentName || !gradeLevel || !dob || !studentClass) {
-        alert('Vui lòng điền đầy đủ thông tin.');
+        alert('Please insert all information.');
         return;
     }
 
@@ -107,12 +107,12 @@ function saveEdit() {
         url: `${baseUrl}/update?${queryString}`,
         method: 'POST', 
         success: function (response) {
-            alert('Cập nhật thông tin thành công!');
+            alert('New information updated successfully!');
             hideEditForm();
             loadData(); 
         },
         error: function (error) {
-            alert('Lỗi khi cập nhật thông tin.');
+            alert('Error when udpating new student.');
             console.error(error);
         }
     });
@@ -121,7 +121,7 @@ async function openEditForm(studentId) {
     let student = studentsData.find(s => s.stuId == studentId);
 
     if (!student) {
-        alert('Không tìm thấy học sinh!');
+        alert('Student information not found!');
         return;
     }
 
@@ -148,16 +148,16 @@ function hideEditForm() {
 }
 
 function deleteStudent(studentId) {
-    if (confirm('Bạn có chắc muốn xóa?')) {
+    if (confirm('Confirming delete this student?')) {
         $.ajax({
             url: `${baseUrl}/delete?id=${encodeURIComponent(studentId)}`,
             method: 'DELETE',
             success: function (response) {
                 loadData();
-                alert('Xóa thành công!');
+                alert('Student deleted successfully!');
             },
             error: function (error) {
-                alert('Lỗi khi xóa dữ liệu');
+                alert('Error when delete a student!');
                 console.error(error);
             }
         });

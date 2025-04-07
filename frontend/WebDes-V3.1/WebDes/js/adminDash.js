@@ -79,3 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gọi hàm khởi tạo
     init();
 });
+
+document.addEventListener('DOMContentLoaded', async function () {
+    console.log("Trang đã load xong!");
+
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = localStorage.getItem("jwtToken");
+
+    if (!userInfo || userInfo.role !== "admin" || !token) {
+        console.error("Người dùng không phải giáo viên hoặc chưa đăng nhập.");
+        alert("You haven't log in or not logging in as admin");
+        window.location.href = "../../../WebDes-V3.1/WebDes/login.html"; // Điều hướng về trang đăng nhập
+    }
+})

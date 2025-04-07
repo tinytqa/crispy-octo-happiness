@@ -27,7 +27,7 @@ function renderTable(data) {
             <td>${subject.sjId}</td>
             <td>${subject.sjName}</td>
             <td>
-                <button class="btn btn-danger btn-sm" onclick="deleteSubject('${subject.sjId}')">Xóa</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteSubject('${subject.sjId}')">Delete</button>
             </td>
         </tr>
         `;
@@ -42,7 +42,7 @@ function addSubject() {
 
     // Kiểm tra thông tin đầu vào
     if (!subjectId || !subjectName) {
-        alert('Vui lòng điền đầy đủ thông tin.');
+        alert('Please insert all information.');
         return;
     }
 
@@ -54,13 +54,13 @@ function addSubject() {
         url: `${baseUrl}/insert?${queryString}`, 
         method: 'POST',
         success: function (response) {
-            alert('Thêm môn học thành công!');
+            alert('New subject added succesfully!');
             loadData(); // Load lại danh sách môn học
             $('#subjectForm')[0].reset(); // Reset form nhập liệu
             hideAddForm(); // Ẩn popup thêm môn học
         },
         error: function (error) {
-            alert('Lỗi khi thêm môn học.');
+            alert('Error when adding new subject!');
             console.error(error);
         }
     });
@@ -78,16 +78,16 @@ function hideAddForm() {
 
 
 function deleteSubject(subjectId) {
-    if (confirm('Bạn có chắc muốn xóa môn học này?')) {
+    if (confirm('Confirming delete this subject?')) {
         $.ajax({
             url: `${baseUrl}/delete?id=${encodeURIComponent(subjectId)}`,
             method: 'DELETE',
             success: function (response) {
-                alert('Xóa thành công!');
+                alert('Subject deleted successfully!');
                 loadData();
             },
             error: function (error) {
-                alert('Lỗi khi xóa môn học');
+                alert('Error when delete subject!');
                 console.error(error);
             }
         });

@@ -3,7 +3,7 @@ const baseUrl = "https://localhost:7241/api";
 $(document).ready(function () {
     const user = JSON.parse(localStorage.getItem("userInfo"));
     if (!user || user.role !== "parent") {
-        alert("Không tìm thấy thông tin phụ huynh!");
+        alert("Parent information not found!");
         return;
     }
 
@@ -14,13 +14,13 @@ $(document).ready(function () {
         .then(res => res.json())
         .then(students => {
             if (!students || students.length === 0) {
-                alert("Phụ huynh chưa có học sinh nào.");
+                alert("No student was assigned for this parent.");
                 return;
             }
 
             // Đổ dữ liệu vào combo box có sẵn
             const studentSelect = $("#studentSelect");
-            studentSelect.empty().append('<option value="">-- Chọn học sinh --</option>');
+            studentSelect.empty().append('<option value="">-- Choose student --</option>');
             students.forEach(s => {
                 studentSelect.append(`<option value="${s.classId}" data-student-id="${s.studentId}">${s.studentName}</option>`);
             });
@@ -38,7 +38,7 @@ $(document).ready(function () {
             });
         })
         .catch(err => {
-            console.error("Lỗi khi lấy danh sách học sinh:", err);
+            console.error("Error when getting teacher list: ", err);
         });
 
     // 2. Hàm gọi API lấy giáo viên theo classId
@@ -50,7 +50,7 @@ $(document).ready(function () {
             .then(res => res.json())
             .then(data => {
                 if (!data || data.length === 0) {
-                    tableBody.append("<tr><td colspan='4'>Không có giáo viên nào cho lớp này.</td></tr>");
+                    tableBody.append("<tr><td colspan='4'>No teachers were assigned for this student's class.</td></tr>");
                     return;
                 }
 
@@ -74,14 +74,14 @@ $(document).ready(function () {
                     lengthChange: false,
                     searching: true,
                     language: {
-                        search: "Tìm kiếm:",
-                        emptyTable: "Không có dữ liệu"
+                        search: "Search:",
+                        emptyTable: "No data found"
                     }
                 });
             })
             .catch(err => {
-                console.error("Lỗi khi tải danh sách giáo viên:", err);
-                tableBody.append("<tr><td colspan='4'>Lỗi khi tải dữ liệu.</td></tr>");
+                console.error("Error when loading teacher list:", err);
+                tableBody.append("<tr><td colspan='4'>Error when loading data.</td></tr>");
             });
     }
 
