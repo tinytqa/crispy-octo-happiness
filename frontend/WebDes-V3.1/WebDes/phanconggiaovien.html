@@ -12,36 +12,10 @@
 
 <body>
     <div class="container">
-        <button id="showAddAssignmentButton" onclick="showAddAssignmentForm()">Assigning new...</button>
+        <button id="showAddAssignmentButton" onclick="showAddAssignmentForm()">Assign</button>
         
         <!-- Phần lọc và hiển thị phân công -->
-        <div class="filter-section">
-            <div>
-                <label for="teacherFilter">Teacher:</label>
-                <select id="teacherFilter">
-                    <option value="">All teachers</option>
-                    <!-- Sẽ được điền bằng JavaScript -->
-                </select>
-            </div>
-            
-            <div>
-                <label for="classFilter">Class:</label>
-                <select id="classFilter">
-                    <option value="">All classes</option>
-                    <!-- Sẽ được điền bằng JavaScript -->
-                </select>
-            </div>
-            
-            <div>
-                <label for="subjectFilter">Subject:</label>
-                <select id="subjectFilter">
-                    <option value="">All subjects</option>
-                    <!-- Sẽ được điền bằng JavaScript -->
-                </select>
-            </div>
-            
-            <button onclick="applyFilters()">Filter</button>
-        </div>
+        
 
         <!-- Bảng phân công -->
         <table class="assignment-table">
@@ -64,7 +38,7 @@
         <div class="popup-content">
             <span class="close-btn" onclick="hideAssignmentForm()">&times;</span>
             <div class="form-section">
-                <h2 id="formTitle">Assigning new...</h2>
+                <h2 id="formTitle">Assigning</h2>
                 
                 <div class="input-group">
                     <label for="teacherSelect">Teacher:</label>

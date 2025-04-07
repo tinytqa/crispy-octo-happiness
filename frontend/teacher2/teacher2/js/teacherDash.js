@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Hiển thị tên và vai trò lên giao diện
         document.querySelector('.user-name').textContent = user.name;
-        document.querySelector('.user-role').textContent = user.role === "teacher" ? "Giáo viên" : user.role;
+        document.querySelector('.user-role').textContent = user.role === "teacher" ? "Teacher" : user.role;
     } else {
         // Nếu chưa đăng nhập, hiển thị thông báo mặc định
         document.querySelector('.user-name').textContent = "Chưa đăng nhập";

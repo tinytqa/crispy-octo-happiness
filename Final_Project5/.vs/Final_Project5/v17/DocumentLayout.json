@@ -1,38 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\",
+  "WorkspaceRootPath": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\github\\crispy-octo-happiness\\final_project5\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\teachersubjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\teachersubjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\github\\crispy-octo-happiness\\final_project5\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\teachersubjectclasscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\teachersubjectclasscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\github\\crispy-octo-happiness\\final_project5\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\github\\crispy-octo-happiness\\final_project5\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\github\\crispy-octo-happiness\\final_project5\\controllers\\studentgradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\studentgradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\studentgradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\github\\crispy-octo-happiness\\final_project5\\models\\tblstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:models\\tblstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\github\\crispy-octo-happiness\\final_project5\\controllers\\parentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\parentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\parentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\github\\crispy-octo-happiness\\final_project5\\controllers\\gradecomponentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\gradecomponentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\gradecomponentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|c:\\users\\tranq\\onedrive\\documents\\github\\crispy-octo-happiness\\final_project5\\models\\tblstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92A26300-30C8-4E5D-B24E-76DBD6027A04}|Final_Project5.csproj|solutionrelative:models\\tblstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,97 +74,141 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ParentController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\ParentController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ParentController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\ParentController.cs",
-              "RelativeToolTip": "Controllers\\ParentController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "TeacherSubjectController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\TeacherSubjectController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TeacherSubjectController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\TeacherSubjectController.cs",
+              "RelativeToolTip": "Controllers\\TeacherSubjectController.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAAKwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T02:45:08.456Z"
+              "WhenOpened": "2025-04-07T18:20:27.479Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "TeacherSubjectClassController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\TeacherSubjectClassController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TeacherSubjectClassController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\TeacherSubjectClassController.cs",
+              "RelativeToolTip": "Controllers\\TeacherSubjectClassController.cs",
+              "ViewState": "AgIAALoAAAAAAAAAAADwv+MAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:17:58.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SubjectController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\SubjectController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SubjectController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\SubjectController.cs",
+              "RelativeToolTip": "Controllers\\SubjectController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAAHkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:13:10.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ParentController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\ParentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ParentController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\ParentController.cs",
+              "RelativeToolTip": "Controllers\\ParentController.cs",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAAALkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T02:45:08.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\LoginController.cs",
               "RelativeToolTip": "Controllers\\LoginController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwG4AAABVAAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAIMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-07T02:45:03.682Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "GradeComponentController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\GradeComponentController.cs",
-              "RelativeDocumentMoniker": "Controllers\\GradeComponentController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\GradeComponentController.cs",
-              "RelativeToolTip": "Controllers\\GradeComponentController.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAkwEUAAAARAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "StudentGradeController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentGradeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StudentGradeController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentGradeController.cs",
+              "RelativeToolTip": "Controllers\\StudentGradeController.cs",
+              "ViewState": "AgIAAPkAAAAAAAAAAADwvxkBAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T02:44:58.47Z"
+              "WhenOpened": "2025-04-07T02:47:23.856Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ClassController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\ClassController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ClassController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\ClassController.cs",
-              "RelativeToolTip": "Controllers\\ClassController.cs",
-              "ViewState": "AgIAAJQAAAAAAAAAAAAowLAAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StudentController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "Controllers\\StudentController.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAAANUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T02:44:50.838Z"
+              "WhenOpened": "2025-04-06T14:47:32.947Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "StudentController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentController.cs",
-              "RelativeDocumentMoniker": "Controllers\\StudentController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentController.cs",
-              "RelativeToolTip": "Controllers\\StudentController.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAmwG4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-06T14:47:32.947Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "TeacherController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\TeacherController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\TeacherController.cs",
               "RelativeDocumentMoniker": "Controllers\\TeacherController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\TeacherController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\TeacherController.cs",
               "RelativeToolTip": "Controllers\\TeacherController.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAYwCIAAABPAAAAAAAAAA==",
+              "ViewState": "AgIAAMsAAAAAAAAAAAAAAPQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-06T09:52:28.117Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "StudentGradeController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentGradeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\StudentGradeController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\StudentGradeController.cs",
-              "RelativeToolTip": "Controllers\\StudentGradeController.cs",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAowLQAAAARAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "GradeComponentController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\GradeComponentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GradeComponentController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\GradeComponentController.cs",
+              "RelativeToolTip": "Controllers\\GradeComponentController.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAAAJsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T02:47:23.856Z"
+              "WhenOpened": "2025-04-07T02:44:58.47Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
+              "Title": "ClassController.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\ClassController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClassController.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Controllers\\ClassController.cs",
+              "RelativeToolTip": "Controllers\\ClassController.cs",
+              "ViewState": "AgIAAI0AAAAAAAAAAADwv7YAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T02:44:50.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "TblStudent.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Models\\TblStudent.cs",
+              "DocumentMoniker": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Models\\TblStudent.cs",
               "RelativeDocumentMoniker": "Models\\TblStudent.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\crispy-octo-happiness\\Final_Project5\\Models\\TblStudent.cs",
+              "ToolTip": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Models\\TblStudent.cs",
               "RelativeToolTip": "Models\\TblStudent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

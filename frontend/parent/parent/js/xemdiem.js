@@ -33,54 +33,60 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
 
-        function loadStudentGrades(studentId) {
-            fetch(`https://localhost:7241/api/StudentGrade/by-student?studentId=${studentId}`)
-                .then(res => res.json())
-                .then(grades => {
-                    const head = document.getElementById("table-head");
-                    const body = document.getElementById("table-body");
-
-                    if (grades.length === 0) {
-                        head.innerHTML = "<tr><th>Không có dữ liệu</th></tr>";
-                        body.innerHTML = "";
-                        return;
-                    }
-
-                    const allComponents = [...new Set(grades.flatMap(d => d.components.map(c => c.gc_name)))];
-
-                    // Tạo header
-                    let headerRow = "<tr><th>Môn học</th>";
-                    allComponents.forEach(comp => {
-                        headerRow += `<th>${comp}</th>`;
-                    });
-                    headerRow += "<th>Tổng kết</th></tr>";
-                    head.innerHTML = headerRow;
-
-                    // Tạo các hàng dữ liệu
-                    let rows = "";
-                    grades.forEach(subject => {
-                        let row = `<tr><td>${subject.subject}</td>`;
-                        allComponents.forEach(comp => {
-                            const found = subject.components.find(c => c.gc_name === comp);
-                            row += `<td>${found ? found.stug_grade : "-"}</td>`;
-                        });
-                        row += `<td>${subject.finalGrade.toFixed(2)}</td></tr>`;
-                        rows += row;
-                    });
-                    body.innerHTML = rows;
-
-                    // Khởi tạo DataTables chỉ với thanh tìm kiếm
-                    $('#grade-table').DataTable({
-                        responsive: true,
-                        searching: true,  // Bật chức năng tìm kiếm
-                        paging: false,    // Ẩn phân trang
-                        info: false,      // Ẩn thông tin hiển thị số dòng
-                        language: {
-                            search: "Tìm kiếm:" // Thay đổi từ tìm kiếm
+            function loadStudentGrades(studentId) {
+                fetch(`https://localhost:7241/api/StudentGrade/by-student?studentId=${studentId}`)
+                    .then(res => res.json())
+                    .then(grades => {
+                        const head = document.getElementById("table-head");
+                        const body = document.getElementById("table-body");
+            
+                        // Hủy DataTable nếu đã được khởi tạo
+                        if ($.fn.DataTable.isDataTable('#grade-table')) {
+                            $('#grade-table').DataTable().clear().destroy();
                         }
+            
+                        if (grades.length === 0) {
+                            head.innerHTML = "<tr><th>Không có dữ liệu</th></tr>";
+                            body.innerHTML = "";
+                            return;
+                        }
+            
+                        const allComponents = [...new Set(grades.flatMap(d => d.components.map(c => c.gc_name)))];
+            
+                        // Tạo header
+                        let headerRow = "<tr><th>Môn học</th>";
+                        allComponents.forEach(comp => {
+                            headerRow += `<th>${comp}</th>`;
+                        });
+                        headerRow += "<th>Tổng kết</th></tr>";
+                        head.innerHTML = headerRow;
+            
+                        // Tạo các hàng dữ liệu
+                        let rows = "";
+                        grades.forEach(subject => {
+                            let row = `<tr><td>${subject.subject}</td>`;
+                            allComponents.forEach(comp => {
+                                const found = subject.components.find(c => c.gc_name === comp);
+                                row += `<td>${found ? found.stug_grade : "-"}</td>`;
+                            });
+                            row += `<td>${subject.finalGrade.toFixed(2)}</td></tr>`;
+                            rows += row;
+                        });
+                        body.innerHTML = rows;
+            
+                        // Khởi tạo lại DataTables
+                        $('#grade-table').DataTable({
+                            responsive: true,
+                            searching: true,
+                            paging: false,
+                            info: false,
+                            language: {
+                                search: "Tìm kiếm:"
+                            }
+                        });
                     });
-                });
-        }
+            }
+            
     } else {
         alert("Không tìm thấy thông tin phụ huynh trong localStorage.");
     }

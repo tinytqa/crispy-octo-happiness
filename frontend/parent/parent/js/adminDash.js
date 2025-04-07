@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Hiển thị tên và vai trò lên giao diện
         document.querySelector('.user-name').textContent = user.name;
-        document.querySelector('.user-role').textContent = user.role === "parent" ? "Phụ huynh" : user.role;
+        document.querySelector('.user-role').textContent = user.role === "parent" ? "Parent" : user.role;
     } else {
         // Nếu chưa đăng nhập, hiển thị thông báo mặc định
         document.querySelector('.user-name').textContent = "Chưa đăng nhập";

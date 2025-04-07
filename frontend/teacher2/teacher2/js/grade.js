@@ -47,36 +47,36 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
         });
     }
-    // $("#save-grades-btn").on("click", async function () {
-    //     const subjectId = $("#subject-selector").val();
-    //     const rows = document.querySelectorAll(".grade-table tbody tr");
-    
-    //     if (!subjectId) {
-    //         alert("Vui lòng chọn môn học.");
-    //         return;
-    //     }
-    
-    //     for (const row of rows) {
-    //         const studentId = row.children[1].textContent.trim();
-    //         const inputs = row.querySelectorAll(".grade-input");
-    
-    //         const gradeValues = Array.from(inputs).map(input => parseFloat(input.value));
-    
-    //         // Mặc định bạn có 3 cột điểm: 15 phút, giữa kỳ, cuối kỳ
-    //         const gradeComponents = [
-    //             { gcId: "GC15", grade: gradeValues[0] },
-    //             { gcId: "GCMID", grade: gradeValues[1] },
-    //             { gcId: "GCFINAL", grade: gradeValues[2] }
-    //         ];
-    
-    //         for (const component of gradeComponents) {
-    //             await saveStudentGrade(studentId, component.gcId, subjectId, component.grade);
-    //         }
-    //     }
-    
-    //     alert("Lưu điểm thành công!");
-    // });
-    
+    console.log("Trang đã load xong!");
+
+
+    if (!userInfo || userInfo.role !== "teacher" || !token) {
+        alert("Bạn chưa đăng nhập hoặc không có quyền truy cập.");
+        return;
+    }
+
+    // Tải danh sách lớp
+    await loadClasses('class-selector', token);
+
+    // Kiểm tra nếu có lớp được chọn từ trang trước
+    const selectedClassId = localStorage.getItem("selectedClassId");
+    if (selectedClassId) {
+        $("#class-selector").val(selectedClassId).trigger("change");
+        // Optionally clear sau khi dùng
+        localStorage.removeItem("selectedClassId");
+    } else {
+        // Nếu không có thì trigger để load lớp đầu tiên
+        classSelector.trigger("change");
+    }
+    if (selectedClassId && selectedClassName) {
+        const option = document.createElement("option");
+        option.value = selectedClassId;
+        option.textContent = selectedClassName;
+        classComboBox.appendChild(option);
+        classComboBox.value = selectedClassId;
+    } else {
+        classComboBox.innerHTML = "<option>No class selected</option>";
+    }
 });
 // async function saveStudentGrade(studentId, gcId, subjectId, grade) {
 //     try {
@@ -202,186 +202,6 @@ async function loadStudentsByClass(classId) {
 let gradesData = [];
 
 
-
-// async function showGrades(classId, subjectId) {
-//     try {
-//         const token = localStorage.getItem("jwtToken");
-
-//         // Lấy danh sách học sinh
-//         const studentsResponse = await fetch(`https://localhost:7241/api/Class/students?classId=${classId}`);
-//         const students = await studentsResponse.json();
-
-//         // Lấy danh sách điểm
-//         const gradesResponse = await fetch(`https://localhost:7241/api/StudentGrade/grades?classId=${classId}&subjectId=${subjectId}`, {
-//             headers: {
-//                 'Authorization': `Bearer ${token}`
-//             }
-//         });
-
-//         const gradesData = await gradesResponse.json();
-
-//         const overallTbody = document.querySelector("#overall-tab tbody");
-//         const detailTbody = document.querySelector("#detail-tab tbody");
-//         overallTbody.innerHTML = "";
-//         detailTbody.innerHTML = "";
-
-//         students.forEach((student, index) => {
-//             const stt = index + 1;
-//             const { stuId, stuName } = student;
-
-//             // Tìm thông tin điểm nếu có
-//             const gradeInfo = gradesData.find(g => g.stu_id === stuId);
-
-//             // Mặc định hiển thị input text cho những học sinh chưa có điểm
-//             let d15 = "", mid = "", final = "", finalGrade = 0;
-
-//             if (gradeInfo) {
-//                 d15 = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("15"))?.stug_grade ?? "";
-//                 mid = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("mid"))?.stug_grade ?? "";
-//                 final = gradeInfo.grades.find(g => g.gc_name.toLowerCase().includes("final"))?.stug_grade ?? "";
-//                 finalGrade = gradeInfo.finalGrade ?? 0;
-//             }
-
-//             // ======= Bảng Tổng Quan =======
-//             const rowOverall = `
-//                 <tr>
-//                     <td>${stt}</td>
-//                     <td>${stuId}</td>
-//                     <td>${stuName}</td>
-//                     <td>${d15 !== "" ? d15 : '<input type="number" class="grade-input-overall" data-type="15 minutes" data-stuid="${stuId}" '}</td>
-//                     <td>${mid !== "" ? mid : '<input type="number" class="grade-input-overall" data-type="Midterm" data-stuid="${stuId}" '}</td>
-//                     <td>${final !== "" ? final : '<input type="number" class="grade-input-overall" data-type="Final" data-stuid="${stuId}" '}</td>
-//                     <td>${finalGrade ? finalGrade.toFixed(2) : "-"}</td>
-//                 </tr>
-//             `;
-//             overallTbody.insertAdjacentHTML("beforeend", rowOverall);
-
-//             // ======= Bảng Chi Tiết =======
-//             const rowDetail = `
-//                 <tr>
-//                     <td>${stt}</td>
-//                     <td>${stuId}</td>
-//                     <td>${stuName}</td>
-//                     <td><input type="number" step="0.1" class="grade-input" data-type="15 minutes" data-stuid="${stuId}" value="${d15}" placeholder="Nhập điểm"></td>
-//                     <td><input type="number" step="0.1" class="grade-input" data-type="Midterm" data-stuid="${stuId}" value="${mid}" placeholder="Nhập điểm"></td>
-//                     <td><input type="number" step="0.1" class="grade-input" data-type="Final" data-stuid="${stuId}" value="${final}" placeholder="Nhập điểm"></td>
-//                     <td>${finalGrade ? finalGrade.toFixed(2) : "-"}</td>
-//                 </tr>
-//             `;
-//             detailTbody.insertAdjacentHTML("beforeend", rowDetail);
-
-//             // Thêm sự kiện cho input trong bảng tổng quan để đồng bộ với bảng chi tiết
-//             if (d15 === "" || mid === "" || final === "") {
-//                 const overallRow = overallTbody.children[overallTbody.children.length - 1];
-//                 const detailRow = detailTbody.children[detailTbody.children.length - 1];
-                
-//                 const overallInputs = overallRow.querySelectorAll('.grade-input-overall');
-//                 const detailInputs = detailRow.querySelectorAll('.grade-input');
-                
-//                 overallInputs.forEach((input, idx) => {
-//                     input.addEventListener('input', (e) => {
-//                         detailInputs[idx].value = e.target.value;
-//                     });
-//                 });
-                
-//                 detailInputs.forEach((input, idx) => {
-//                     input.addEventListener('input', (e) => {
-//                         if (overallInputs[idx]) {
-//                             overallInputs[idx].value = e.target.value;
-//                         }
-//                     });
-//                 });
-//             }
-//         });
-
-//     } catch (error) {
-//         console.error(error);
-//         alert("Lỗi khi tải dữ liệu điểm hoặc học sinh.");
-//     }
-// }
-
-// async function saveStudentGrade() {
-//     const subjectId = $("#subject-selector").val();
-//     const classId = $("#class-selector").val();
-
-//     if (!subjectId || !classId) {
-//         alert("Vui lòng chọn lớp và môn học.");
-//         return;
-//     }
-
-//     const token = localStorage.getItem("jwtToken");
-
-//     // Lấy danh sách component để ánh xạ gc_name -> gcId
-//     let componentMap = {}; // ví dụ: { "15 minutes": "Literature_15" }
-//     try {
-//         const res = await fetch(`https://localhost:7241/api/GradeComponent/by-subject?subjectId=${subjectId}`, {
-//             headers: {
-//                 "Authorization": "Bearer " + token
-//             }
-//         });
-         
-//         const components = await res.json();
-//         components.forEach(comp => {
-//             componentMap[comp.gcName] = comp.gcId;
-//         });
-//     } catch (error) {
-//         console.error("Lỗi lấy grade components:", error);
-//         alert("Không thể tải thành phần điểm.");
-//         return;
-//     }
-
-//     // Duyệt qua từng ô điểm để gom dữ liệu
-//     const rows = document.querySelectorAll("#detail-tab .grade-input[data-stuid]");
-
-//     const gradeMap = {};
-//     rows.forEach(input => {
-//         const studentId = input.getAttribute("data-stuid");
-//         const type = input.getAttribute("data-type"); // "15 minutes", "Final", "Midterm"
-//         const grade = parseFloat(input.value);
-
-//         if (!gradeMap[studentId]) {
-//             gradeMap[studentId] = {};
-//         }
-
-//         if (!isNaN(grade)) {
-//             gradeMap[studentId][type] = grade;
-//         }
-//     });
-
-//     // Gửi điểm
-//     for (const studentId in gradeMap) {
-//         const grades = gradeMap[studentId];
-//         for (const gcName in grades) {
-//             const grade = grades[gcName];
-//             const gcId = componentMap[gcName];
-
-//             if (!gcId) {
-//                 console.warn(`Không tìm thấy gcId cho "${gcName}", bỏ qua.`);
-//                 continue;
-//             }
-
-//             try {
-//                 const response = await fetch(`https://localhost:7241/api/studentgrade/insert?sID=${studentId}&gcID=${gcId}&subjectID=${subjectId}&grade=${grade}`, {
-//                     method: "POST",
-//                     headers: {
-//                         "Authorization": "Bearer " + token
-//                     }
-//                 });
-
-//                 if (!response.ok) {
-//                     const errText = await response.text();
-//                     console.error(`Lỗi lưu điểm ${gcName} cho ${studentId}:`, errText);
-//                 } else {
-//                     console.log(`Đã lưu điểm ${gcName} cho ${studentId}`);
-//                 }
-//             } catch (err) {
-//                 console.error(`Lỗi gọi API lưu điểm cho ${studentId} (${gcName}):`, err);
-//             }
-//         }
-//     }
-
-//     alert("Lưu điểm thành công!");
-// }
 async function showGrades(classId, subjectId) {
     try {
         const token = localStorage.getItem("jwtToken");
