@@ -360,6 +360,22 @@
   },
   {
     "ContainingType": "Final_Project5.Controllers.StudentController",
+    "Method": "GetStudentsByParent",
+    "RelativePath": "api/Student/by-parent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "parentId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final_Project5.Controllers.StudentController",
     "Method": "GetClassNameByParent",
     "RelativePath": "api/Student/classnameByParent",
     "HttpMethod": "GET",
@@ -773,7 +789,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "className",
+        "Name": "classId",
         "Type": "System.String",
         "IsRequired": false
       }

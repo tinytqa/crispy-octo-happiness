@@ -644,6 +644,27 @@
         }
       }
     },
+    "/api/Student/by-parent": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/StudentGrade/show": {
       "get": {
         "tags": [
@@ -983,7 +1004,7 @@
         ],
         "parameters": [
           {
-            "name": "className",
+            "name": "classId",
             "in": "query",
             "schema": {
               "type": "string"

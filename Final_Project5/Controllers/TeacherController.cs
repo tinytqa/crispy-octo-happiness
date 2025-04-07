@@ -58,20 +58,20 @@ namespace Final_Project5.Controllers
 
         [HttpGet]
         [Route("showTeacherForParent")]
-        public IActionResult ShowTeacherForParent([FromQuery] string className)
+        public IActionResult ShowTeacherForParent([FromQuery] string classId)
         {
-            if (string.IsNullOrEmpty(className))
-                return BadRequest("className is required.");
+            if (string.IsNullOrEmpty(classId))
+                return BadRequest("classId is required.");
 
             var teachers = SLL1.TblTeachers
                 .Include(t => t.TblTeacherSubjects)
                     .ThenInclude(ts => ts.TblTeacherSubjectClasses)
-                        .ThenInclude(tsc => tsc.TscC) // navigation to tblClass
+                        .ThenInclude(tsc => tsc.TscC)
                 .Include(t => t.TblTeacherSubjects)
                     .ThenInclude(ts => ts.TsjSj)
                 .Where(t => t.TblTeacherSubjects
                     .Any(ts => ts.TblTeacherSubjectClasses
-                        .Any(tsc => tsc.TscC.CName == className)))
+                        .Any(tsc => tsc.TscCId == classId)))
                 .Select(t => new
                 {
                     t.TId,
@@ -79,7 +79,7 @@ namespace Final_Project5.Controllers
                     t.TPhone,
                     Subjects = t.TblTeacherSubjects
                         .Where(ts => ts.TblTeacherSubjectClasses
-                            .Any(tsc => tsc.TscC.CName == className))
+                            .Any(tsc => tsc.TscCId == classId))
                         .Select(ts => new
                         {
                             ts.TsjSj.SjId,
@@ -92,6 +92,7 @@ namespace Final_Project5.Controllers
 
             return Ok(teachers);
         }
+
 
 
 

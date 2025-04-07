@@ -170,6 +170,44 @@ namespace Final_Project5.Controllers
                 return StatusCode(500, "An error occurred while fetching the class name(s).");
             }
         }
+        [HttpGet]
+        [Route("by-parent")]
+        public IActionResult GetStudentsByParent([FromQuery] string parentId)
+        {
+            if (string.IsNullOrEmpty(parentId))
+            {
+                return BadRequest("Parent ID is required.");
+            }
+
+            try
+            {
+                var students = SLL1.TblStudents
+                    .Include(s => s.StuC)
+                    .Where(s => s.StuPId == parentId)
+                    .Select(s => new
+                    {
+                        StudentId = s.StuId,
+                        StudentName = s.StuName,
+                        Grade = s.StuGradeLevel,
+                        Dob = s.StuDob,
+                        ClassId = s.StuCId,
+                        ClassName = s.StuC != null ? s.StuC.CName : null
+                    })
+                    .ToList();
+
+                if (students.Count == 0)
+                {
+                    return NotFound("No students found for this parent.");
+                }
+
+                return Ok(students);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while fetching students.");
+            }
+        }
+
 
     }
 }

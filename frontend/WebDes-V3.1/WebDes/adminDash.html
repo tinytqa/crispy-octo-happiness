@@ -52,11 +52,14 @@
         <!-- Sidebar với menu điều hướng -->
         <nav class="sidebar" id="sidebar">
             <!-- Hiển thị tên người dùng thay vì semester -->
-            <div class="user-info">
+            <!-- <div class="user-info">
                 <div class="user-name">Nguyễn Văn A</div>
                 <div class="user-role">Quản trị viên</div>
+            </div> -->
+            <div class="user-info">
+                <div class="user-name" id="user-name"></div>
+                <div class="user-role" id="user-role"></div>
             </div>
-
             <ul class="nav-menu">
                 <!-- Các mục menu với icon phù hợp -->
                 <li class="nav-item active" data-page="monhoc.html" data-icon="fa-book">
@@ -114,21 +117,37 @@
     </div>
 
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lấy thông tin người dùng từ localStorage
+            const userInfo = localStorage.getItem('userInfo');
+
+            if (userInfo) {
+                const user = JSON.parse(userInfo);
+
+                // Hiển thị tên và vai trò lên giao diện
+                document.querySelector('.user-name').textContent = user.name;
+                document.querySelector('.user-role').textContent = user.role === "admin" ? "Admin" : user.role;
+            } else {
+                // Nếu chưa đăng nhập, hiển thị thông báo mặc định
+                document.querySelector('.user-name').textContent = "Chưa đăng nhập";
+                document.querySelector('.user-role').textContent = "";
+            }
+        });
+        $(document).ready(function () {
             // Toggle user dropdown menu
-            $('#user-avatar').click(function() {
+            $('#user-avatar').click(function () {
                 $('#account-dropdown').toggleClass('show');
             });
 
             // Close dropdown when clicking outside
-            $(document).click(function(e) {
+            $(document).click(function (e) {
                 if (!$(e.target).closest('.user-account-menu').length) {
                     $('#account-dropdown').removeClass('show');
                 }
             });
 
             // Toggle sidebar
-            $('#sidebar-toggle').click(function() {
+            $('#sidebar-toggle').click(function () {
                 $('#sidebar').toggleClass('collapsed');
                 // Update icon when toggled
                 if ($('#sidebar').hasClass('collapsed')) {
@@ -139,21 +158,21 @@
             });
 
             // Navigation menu functionality
-            $('.nav-item').click(function() {
+            $('.nav-item').click(function () {
                 // Remove active class from all menu items
                 $('.nav-item').removeClass('active');
-                
+
                 // Add active class to clicked item
                 $(this).addClass('active');
-                
+
                 // Get page to load and update icon
                 var pageToLoad = $(this).data('page');
                 var iconClass = $(this).data('icon');
-                
+
                 // Update content header
                 var menuText = $(this).find('.item-text').text();
                 $('.content-header').html('<i class="fas ' + iconClass + '"></i> ' + menuText);
-                
+
                 // Load content in iframe
                 $('#content-frame').attr('src', pageToLoad);
             });

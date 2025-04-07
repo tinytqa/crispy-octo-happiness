@@ -46,7 +46,7 @@ $(document).ready(function () {
         const tableBody = $("#teacherList");
         tableBody.empty();
 
-        fetch(`${baseUrl}/Teacher/showTeacherForClass?classId=${classId}`)
+        fetch(`${baseUrl}/Teacher/showTeacherForParent?classId=${encodeURIComponent(classId)}`)
             .then(res => res.json())
             .then(data => {
                 if (!data || data.length === 0) {
@@ -58,7 +58,7 @@ $(document).ready(function () {
                     const subjectNames = teacher.subjects.map(sub => sub.sjName).join(", ");
                     return `
                         <tr>
-                            <td>${teacher.className}</td>
+                            <td>${classId}</td>
                             <td>${teacher.tName}</td>
                             <td>${teacher.tPhone}</td>
                             <td>${subjectNames}</td>
@@ -84,4 +84,5 @@ $(document).ready(function () {
                 tableBody.append("<tr><td colspan='4'>Lỗi khi tải dữ liệu.</td></tr>");
             });
     }
+
 });
