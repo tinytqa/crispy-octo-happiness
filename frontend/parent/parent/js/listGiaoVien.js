@@ -1,76 +1,87 @@
-// Base URL (change this only in one place)
-const baseUrl = "https://localhost:7241/api"; // Change this to your actual base API URL
+const baseUrl = "https://localhost:7241/api";
 
 $(document).ready(function () {
-
-    // Function to fetch class names by parent ID
-    async function fetchClassNamesByParent(parentId) {
-        try {
-            const response = await fetch(`${baseUrl}/Student/classnameByParent?parentId=${encodeURIComponent(parentId)}`);
-            
-            if (!response.ok) {
-                const errorMsg = await response.text();
-                throw new Error(errorMsg);
-            }
-    
-            const data = await response.json();
-    
-            // Extract class names into a plain array of strings
-            const classNames = data.map(item => item.className);
-    
-            console.log("Class Names:", classNames);
-            return classNames;
-        } catch (error) {
-            console.error("Error fetching class names:", error.message);
-            return [];
-        }
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+    if (!user || user.role !== "parent") {
+        alert("Không tìm thấy thông tin phụ huynh!");
+        return;
     }
 
-    // Call the function and handle the returned promise
-    async function loadTeachersForParent(parentId) {
-        const classNames = await fetchClassNamesByParent(parentId);
+    const parentId = user.id;
 
-        if (classNames.length === 0) {
-            $("#teacherList").append("<tr><td colspan='5'>Không có lớp nào cho phụ huynh này.</td></tr>");
-            return;
-        }
+    // 1. Lấy danh sách học sinh theo phụ huynh
+    fetch(`${baseUrl}/Student/by-parent?parentId=${parentId}`)
+        .then(res => res.json())
+        .then(students => {
+            if (!students || students.length === 0) {
+                alert("Phụ huynh chưa có học sinh nào.");
+                return;
+            }
 
-        // Clear the table before appending new data
-        const tableBody = $("#teacherList");
-        tableBody.empty();
+            // Đổ dữ liệu vào combo box có sẵn
+            const studentSelect = $("#studentSelect");
+            studentSelect.empty().append('<option value="">-- Chọn học sinh --</option>');
+            students.forEach(s => {
+                studentSelect.append(`<option value="${s.classId}" data-student-id="${s.studentId}">${s.studentName}</option>`);
+            });
 
-        classNames.forEach(className => {
-            fetch(`${baseUrl}/Teacher/showTeacherForParent?className=${encodeURIComponent(className)}`)
-            .then(response => {
-                if (!response.ok) throw new Error("Network response was not ok.");
-                return response.json();
-            })
-            .then(data => {
-                if (data.length === 0) {
-                    tableBody.append("<tr><td colspan='5'>Không có giáo viên nào cho lớp này.</td></tr>");
+            // Khi chọn học sinh -> Load giáo viên dạy lớp tương ứng
+            studentSelect.on("change", function () {
+                const classId = $(this).val();
+
+                if (!classId) {
+                    $("#teacherList").empty();
                     return;
                 }
 
-                data.forEach(teacher => {
+                loadTeachersByClass(classId);
+            });
+        })
+        .catch(err => {
+            console.error("Lỗi khi lấy danh sách học sinh:", err);
+        });
+
+    // 2. Hàm gọi API lấy giáo viên theo classId
+    function loadTeachersByClass(classId) {
+        const tableBody = $("#teacherList");
+        tableBody.empty();
+
+        fetch(`${baseUrl}/Teacher/showTeacherForClass?classId=${classId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data || data.length === 0) {
+                    tableBody.append("<tr><td colspan='4'>Không có giáo viên nào cho lớp này.</td></tr>");
+                    return;
+                }
+
+                const rows = data.map(teacher => {
                     const subjectNames = teacher.subjects.map(sub => sub.sjName).join(", ");
-                    const row = `
+                    return `
                         <tr>
-                            <td>${className}</td>
-                            <td>${teacher.tId}</td>
+                            <td>${teacher.className}</td>
                             <td>${teacher.tName}</td>
                             <td>${teacher.tPhone}</td>
                             <td>${subjectNames}</td>
                         </tr>`;
-                    tableBody.append(row);
+                });
+
+                tableBody.html(rows.join(""));
+
+                $('#teacherTable').DataTable({
+                    destroy: true,
+                    paging: false,
+                    info: false,
+                    lengthChange: false,
+                    searching: true,
+                    language: {
+                        search: "Tìm kiếm:",
+                        emptyTable: "Không có dữ liệu"
+                    }
                 });
             })
-            .catch(error => {
-                console.error("Fetch error:", error);
-                tableBody.append("<tr><td colspan='4'>Đã xảy ra lỗi khi tải dữ liệu.</td></tr>");
+            .catch(err => {
+                console.error("Lỗi khi tải danh sách giáo viên:", err);
+                tableBody.append("<tr><td colspan='4'>Lỗi khi tải dữ liệu.</td></tr>");
             });
-        });
     }
-
-    // Call the function with a specific parent ID
-    loadTeachersForParent(JSON.parse(localStorage.getItem("userInfo")).id);
 });

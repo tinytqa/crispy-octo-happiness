@@ -719,6 +719,48 @@
         }
       }
     },
+    "/api/StudentGrade/by-student": {
+      "get": {
+        "tags": [
+          "StudentGrade"
+        ],
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentGrade/by-parent": {
+      "get": {
+        "tags": [
+          "StudentGrade"
+        ],
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/StudentGrade/insert": {
       "post": {
         "tags": [

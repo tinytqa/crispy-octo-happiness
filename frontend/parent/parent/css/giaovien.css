@@ -18,20 +18,18 @@ body {
 /* Container chính */
 .container {
     width: 100%;
-    margin: 0 auto; /* Changed from 50px auto to 0 auto */
+    margin: 0 auto;
     background: white;
     padding: 20px;
-    border-radius: 8px; /* Changed from 8px to 0 */
+    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-
 
 /* Tiêu đề phụ */
 h3 {
     color: #2d7aba;
     margin-bottom: 10px;
 }
-
 
 /* Input chung */
 input[type="text"], input[type="password"] {
@@ -75,15 +73,57 @@ th, td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: center;
+    vertical-align: middle;
 }
 
-/* Header bảng */
-th {
-    background-color: #2d7aba;
-    color: white;
+/* Header bảng tone xanh */
+#teacherTable thead tr {
+    background-color: #2D7ABA !important;
 }
 
+#teacherTable thead th {
+    color: white !important;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+}
+/* Header bảng tone xanh đậm */
+table#teacherTable thead {
+    background-color: #2D7ABA !important;
+}
 
+table#teacherTable thead th {
+    background-color: #2D7ABA !important;
+    color: #fff !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    vertical-align: middle;
+}
+
+/* Căn giữa nội dung bảng */
+#teacherTable tbody td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Tùy chỉnh ô tìm kiếm */
+.dataTables_filter label {
+    color: #2D7ABA;
+    font-weight: 500;
+}
+
+.dataTables_filter input {
+    border: 1px solid #2D7ABA;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+/* Ẩn entries, phân trang và info */
+.dataTables_length,
+.dataTables_info,
+.dataTables_paginate {
+    display: none !important;
+}
 
 /* Make the popup more mobile-friendly */
 @media (max-width: 768px) {

@@ -73,6 +73,7 @@ namespace Final_Project5.Controllers
             return Ok("Inserted Succesfully!");
 
         }
+        
 
         [HttpPost]
         [Route("update")]

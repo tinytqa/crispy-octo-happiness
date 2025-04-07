@@ -79,3 +79,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gọi hàm khởi tạo
     init();
 });
+document.addEventListener('DOMContentLoaded', function() {
+    // Lấy thông tin người dùng từ localStorage
+    const userInfo = localStorage.getItem('userInfo');
+
+    if (userInfo) {
+        const user = JSON.parse(userInfo);
+
+        // Hiển thị tên và vai trò lên giao diện
+        document.querySelector('.user-name').textContent = user.name;
+        document.querySelector('.user-role').textContent = user.role === "parent" ? "Phụ huynh" : user.role;
+    } else {
+        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
+        document.querySelector('.user-name').textContent = "Chưa đăng nhập";
+        document.querySelector('.user-role').textContent = "";
+    }
+});

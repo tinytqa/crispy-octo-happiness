@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         } else if (role === "teacher") {
                             window.location.href = "../../teacher2/teacher2/teacherTab.html";
                         } else if (role === "parent") {
-                            window.location.href = "/parent/parent/parentTab.html";
+                            window.location.href = "../../../parent/parent/parentTab.html";
                         }
                     }, 1000);
                 } else {

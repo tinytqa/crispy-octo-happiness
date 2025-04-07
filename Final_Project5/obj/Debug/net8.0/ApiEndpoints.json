@@ -474,6 +474,38 @@
   },
   {
     "ContainingType": "Final_Project5.Controllers.StudentGradeController",
+    "Method": "GetGradesByParent",
+    "RelativePath": "api/StudentGrade/by-parent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "parentId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final_Project5.Controllers.StudentGradeController",
+    "Method": "GetGradesByStudent",
+    "RelativePath": "api/StudentGrade/by-student",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final_Project5.Controllers.StudentGradeController",
     "Method": "Delete",
     "RelativePath": "api/StudentGrade/delete",
     "HttpMethod": "DELETE",

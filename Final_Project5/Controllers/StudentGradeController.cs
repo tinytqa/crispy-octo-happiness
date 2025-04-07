@@ -70,39 +70,6 @@ namespace Final_Project5.Controllers
             return Ok(studentGrades);
         }
 
-
-        //        [HttpPost("save-multiple")]
-        //        public IActionResult SaveMultiple(
-        //    [FromQuery] string sID,
-        //    [FromQuery] string gcIDs, // "GC15P,GC15M"
-        //    [FromQuery] string grades // "8,9"
-        //)
-        //        {
-        //            try
-        //            {
-        //                var gcIdList = gcIDs.Split(',');
-        //                var gradeList = grades.Split(',').Select(int.Parse).ToList();
-
-        //                for (int i = 0; i < gcIdList.Length; i++)
-        //                {
-        //                    var grade = new TblStudentGrade
-        //                    {
-        //                        StugId = Guid.NewGuid(),
-        //                        StugStuId = sID,
-        //                        StugGcId = gcIdList[i],
-        //                        StugGrade = gradeList[i]
-        //                    };
-        //                    SLL1.TblStudentGrades.Add(grade);
-        //                }
-
-        //                SLL1.SaveChanges();
-        //                return Ok("Inserted multiple successfully!");
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                return BadRequest("Error: " + ex.Message);
-        //            }
-        //        }
         [HttpPost("save-multiple")]
         public IActionResult SaveMultiple(
       [FromQuery] string sID,
@@ -125,7 +92,6 @@ namespace Final_Project5.Controllers
                     var gcId = gcIdList[i];
                     var grade = gradeList[i];
 
-                    // ✅ Kiểm tra điểm phải nằm trong khoảng từ 0 đến 10
                     if (grade < 0 || grade > 10)
                     {
                         return BadRequest($"Điểm tại vị trí {i + 1} không hợp lệ: {grade}. Phải nằm trong khoảng từ 0 đến 10.");
@@ -160,7 +126,67 @@ namespace Final_Project5.Controllers
             }
         }
 
+        [HttpGet("by-student")]
+        public async Task<IActionResult> GetGradesByStudent(string studentId)
+        {
+            var grades = await SLL1.TblStudentGrades
+                .Include(sg => sg.StugGc)
+                .ThenInclude(gc => gc.GcSj)
+                .Where(sg => sg.StugStuId == studentId)
+                .GroupBy(sg => new { sg.StugGc.GcSj.SjId, sg.StugGc.GcSj.SjName })
+                .Select(g => new
+                {
+                    subject = g.Key.SjName,
+                    components = g.Select(x => new
+                    {
+                        gc_name = x.StugGc.GcName,
+                        stug_grade = x.StugGrade
+                    }).ToList(),
+                    finalGrade = g.Sum(x => x.StugGrade * x.StugGc.GcWeight) / 100.0
+                })
+                .ToListAsync();
 
+            return Ok(grades);
+        }
+        [HttpGet("by-parent")]
+        public async Task<IActionResult> GetGradesByParent(string parentId)
+        {
+            var students = await SLL1.TblStudents
+                .Where(s => s.StuPId == parentId)
+                .ToListAsync();
+
+            if (students.Count == 0)
+                return NotFound("Phụ huynh chưa có học sinh nào.");
+
+            var result = new List<object>();
+
+            foreach (var student in students)
+            {
+                var grades = await SLL1.TblStudentGrades
+                    .Include(g => g.StugGc)
+                    .Include(g => g.StugGc.GcSj)
+                    .Where(g => g.StugStuId == student.StuId)
+                    .GroupBy(g => g.StugGc.GcSj.SjName)
+                    .Select(g => new {
+                        subject = g.Key,
+                        components = g.Select(x => new {
+                            gc_name = x.StugGc.GcName,
+                            stug_grade = x.StugGrade
+                        }),
+                        finalGrade = g.Sum(x => x.StugGrade * x.StugGc.GcWeight) / 100.0
+                    })
+                    .ToListAsync();
+
+                result.Add(new
+                {
+                    studentId = student.StuId,
+                    studentName = student.StuName,
+                    grades = grades
+                });
+            }
+
+            return Ok(result);
+        }
 
 
         [HttpPost]

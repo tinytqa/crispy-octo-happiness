@@ -51,8 +51,8 @@
         <nav class="sidebar">
             <!-- Hiển thị tên người dùng -->
             <div class="user-info">
-                <div class="user-name">Trần Thị B</div>
-                <div class="user-role">Phụ huynh</div>
+                <div class="user-name" id="user-name"></div>
+                <div class="user-role" id="user-role"></div>
             </div>
 
             <ul class="nav-menu">
@@ -61,9 +61,9 @@
                 <li class="nav-item" data-page="listGiaoVien.html" data-icon="fa-chalkboard-teacher">
                     <span><i class="fas fa-chalkboard-teacher"></i> Giáo viên</span>
                 </li>
-                <li class="nav-item" data-page="listHocsinh.html" data-icon="fa-user-graduate">
+                <!-- <li class="nav-item" data-page="listHocsinh.html" data-icon="fa-user-graduate">
                     <span><i class="fas fa-user-graduate"></i> Học sinh</span>
-                </li>
+                </li> -->
                 <li class="nav-item" data-page="diem.html" data-icon="fa-bars">
                     <span><i class="fas fa-bars"></i> Điểm</span>
                 </li>
@@ -72,10 +72,10 @@
 
         <div class="main-content">
             <!-- Tiêu đề của trang hiện tại với icon -->
-            <h1 class="content-header"><i class="fas fa-book"></i> Môn học</h1>
+            <h1 class="content-header"><i class="fas fa-book"></i>Giáo Viên</h1>
 
             <!-- iframe để hiển thị nội dung tương ứng -->
-            <iframe id="content-frame" class="content-frame" src="listHocSinh.html"></iframe>
+            <iframe id="content-frame" class="content-frame" src="listGiaoVien.html"></iframe>
         </div>
     </div>
 </body>
