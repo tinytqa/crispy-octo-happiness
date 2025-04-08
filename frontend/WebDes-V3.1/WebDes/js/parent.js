@@ -62,7 +62,10 @@ function addParent() {
         alert('Please choose at least one student.');
         return;
     }
-
+    if (!isValidPhoneNumber(parentPhone)) {
+        alert("Invalid phone number");
+        return;
+    }
     // Tạo query string từ danh sách học sinh
     var studentIdsQuery = studentIds.map(id => `studentIds=${encodeURIComponent(id)}`).join('&');
 
@@ -121,7 +124,11 @@ function openDialog(parentId) {
 
     $('#editParentPopup').show();
 }
-
+function isValidPhoneNumber(phoneNumber) {
+    // Kiểm tra số điện thoại Việt Nam: bắt đầu bằng 03, 05, 07, 08, 09 và theo sau là 8 số
+    const phoneRegex = /^(03|05|07|08|09)\d{8}$/;
+    return phoneRegex.test(phoneNumber);
+}
 function saveEditParent() {
     var parentId = $('#editParentId').val();
     var parentName = $('#editParentName').val();
@@ -132,7 +139,10 @@ function saveEditParent() {
         alert('Please insert all information.');
         return;
     }
-
+    if (!isValidPhoneNumber(parentPhone)) {
+        alert("Invalid phone number");
+        return;
+    }
     // Tạo query string
     var queryString = `id=${encodeURIComponent(parentId)}&` +
         `name=${encodeURIComponent(parentName)}&` +

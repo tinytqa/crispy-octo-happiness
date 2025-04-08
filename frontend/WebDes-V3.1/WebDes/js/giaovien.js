@@ -61,7 +61,10 @@ function addTeacher() {
         alert('Please insert all information and choose at least one subject.');
         return;
     }
-
+    if (!isValidPhoneNumber(teacherPhone)) {
+        alert("Invalid phone number.");
+        return;
+    }
     var subjectsQuery = selectedSubjects.join(',');
 
     $.ajax({
@@ -87,7 +90,11 @@ async function showAddForm() {
 
     document.getElementById('addTeacherPopup').style.display = 'flex';
 }
-
+function isValidPhoneNumber(phoneNumber) {
+    // Kiểm tra số điện thoại Việt Nam: bắt đầu bằng 03, 05, 07, 08, 09 và theo sau là 8 số
+    const phoneRegex = /^(03|05|07|08|09)\d{8}$/;
+    return phoneRegex.test(phoneNumber);
+}
 // Hiển thị form chỉnh sửa giáo viên
 
 async function openEditForm(teacherId) {
@@ -146,7 +153,10 @@ function saveEditTeacher() {
         alert('Please insert all information and choose at least one subject.');
         return;
     }
-
+    if (!isValidPhoneNumber(teacherPhone)) {
+        alert("Invalid phone number");
+        return;
+    }
     var subjectsQuery = selectedSubjects.join(',');
 
     // Tạo URL với Query String
