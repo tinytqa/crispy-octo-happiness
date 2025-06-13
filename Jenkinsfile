@@ -12,7 +12,7 @@ pipeline {
 		steps
 		{
 			echo 'Restore package'
-			bat 'dotnet restore'
+			bat 'dotnet restore "Final_Project5.sln"'
 		}
 	}
   } // end stagess
