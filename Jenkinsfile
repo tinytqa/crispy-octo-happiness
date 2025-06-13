@@ -12,7 +12,7 @@ pipeline {
 		steps
 		{
 			echo 'Restore package'
-			bat 'dotnet restore "Final_Project5.sln"'
+			bat 'dotnet restore "C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\Final_Project5.sln"'
 		}
 	}
   } // end stagess
