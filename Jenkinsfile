@@ -15,5 +15,11 @@ pipeline {
 			bat 'dotnet restore "C:/Users/tranq/OneDrive/Documents/GitHub/crispy-octo-happiness/Final_Project5/Final_Project5.sln"'
 		}
 	}
+    stage ('build') {
+		steps {
+			echo 'build project netcore'
+			bat 'dotnet build  --configuration Release'
+		}
+	}
   } // end stagess
 }//end pipeline

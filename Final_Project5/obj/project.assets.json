@@ -4893,7 +4893,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tranq\\.nuget\\packages\\": {},
+    "C:\\WINDOWS\\system32\\config\\systemprofile\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -4902,14 +4902,14 @@
       "projectUniqueName": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Final_Project5.csproj",
       "projectName": "Final_Project5",
       "projectPath": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\Final_Project5.csproj",
-      "packagesPath": "C:\\Users\\tranq\\.nuget\\packages\\",
+      "packagesPath": "C:\\WINDOWS\\system32\\config\\systemprofile\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\tranq\\OneDrive\\Documents\\GitHub\\crispy-octo-happiness\\Final_Project5\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\tranq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
