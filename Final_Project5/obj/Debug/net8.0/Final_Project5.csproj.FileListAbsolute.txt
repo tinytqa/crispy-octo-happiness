@@ -332,12 +332,6 @@ C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\ob
 C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets\msbuild.Final_Project5.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets\msbuild.Final_Project5.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets\msbuild.build.Final_Project5.props
-C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Final_Project5.props
-C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Final_Project5.props
-C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\Final_Pr.36D2ABDC.Up2Date
 C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\Final_Project5.dll
@@ -519,3 +513,4 @@ C:\Users\ADMIN\OneDrive\Tài liệu\GitHub\crispy-octo-happiness\Final_Project
 C:\Users\ADMIN\OneDrive\Tài liệu\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\Final_Project5.pdb
 C:\Users\ADMIN\OneDrive\Tài liệu\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\Final_Project5.genruntimeconfig.cache
 C:\Users\ADMIN\OneDrive\Tài liệu\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\ref\Final_Project5.dll
+C:\Users\tranq\OneDrive\Documents\GitHub\crispy-octo-happiness\Final_Project5\obj\Debug\net8.0\staticwebassets.build.json.cache
