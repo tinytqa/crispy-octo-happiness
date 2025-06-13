@@ -18,7 +18,7 @@ pipeline {
     stage ('build') {
 		steps {
 			echo 'build project netcore'
-			bat 'dotnet build  --configuration Release'
+			bat 'dotnet build "C:/Users/tranq/OneDrive/Documents/GitHub/crispy-octo-happiness/Final_Project5/Final_Project5.sln" --configuration Release'
 		}
 	}
   } // end stagess
