@@ -46,6 +46,18 @@ pipeline {
 		bat 'iisreset /start'
 	}
 }
+    stage('Deploy to IIS') {
+            steps {
+                powershell '''
+               
+                # Tạo website nếu chưa có
+                Import-Module WebAdministration
+                if (-not (Test-Path IIS:\\Sites\\MySite)) {
+                    New-Website -Name "MySite" -Port 82 -PhysicalPath "C:\\test1-netcore"
+                }
+                '''
+            }
+        } // end deploy iis
 
   } // end stagess
 }//end pipeline
