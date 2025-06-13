@@ -47,17 +47,30 @@ pipeline {
 	}
 }
     stage('Deploy to IIS') {
-            steps {
-                powershell '''
-               
-                # Tạo website nếu chưa có
-                Import-Module WebAdministration
-                if (-not (Test-Path IIS:\\Sites\\MySite)) {
-                    New-Website -Name "MySite1" -Port 82 -PhysicalPath "C:\\wwwroot\\myproject_testcd"
-                }
-                '''
-            }
-        } // end deploy iis
+    steps {
+        powershell '''
+        Import-Module WebAdministration
+
+        # Tên site muốn deploy
+        $siteName = "MySite"
+
+        # Đường dẫn publish
+        $path = "C:\\wwwroot\\myproject_testcd"
+
+        # Port mong muốn
+        $port = 82
+
+        # Xóa site nếu đã tồn tại
+        if (Test-Path "IIS:\\Sites\\$siteName") {
+            Remove-Website -Name $siteName
+        }
+
+        # Tạo site mới
+        New-Website -Name $siteName -Port $port -PhysicalPath $path -Force
+        '''
+    }
+}
+
 
   } // end stagess
 }//end pipeline
