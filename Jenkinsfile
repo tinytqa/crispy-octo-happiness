@@ -34,5 +34,18 @@ pipeline {
 			bat 'dotnet publish "C:/Users/tranq/OneDrive/Documents/GitHub/crispy-octo-happiness/Final_Project5/Final_Project5.sln" -c Release -o ./publish'
 		}
 	}
+    stage ('Publish to IIS') {
+	steps {
+		echo 'Stopping IIS...'
+		bat 'iisreset /stop'
+
+		echo 'Deploying to IIS folder...'
+		bat 'xcopy "%WORKSPACE%\\publish\\*" "C:\\wwwroot\\myproject_testcd\\" /E /Y /I /R'
+
+		echo 'Starting IIS...'
+		bat 'iisreset /start'
+	}
+}
+
   } // end stagess
 }//end pipeline
