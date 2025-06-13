@@ -21,5 +21,11 @@ pipeline {
 			bat 'dotnet build "C:/Users/tranq/OneDrive/Documents/GitHub/crispy-octo-happiness/Final_Project5/Final_Project5.sln" --configuration Release'
 		}
 	}
+    stage ('tests') {
+		steps{
+			echo 'running test...'
+			bat 'dotnet test --no-build --verbosity normal'
+		}
+	}
   } // end stagess
 }//end pipeline
