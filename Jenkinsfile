@@ -27,5 +27,12 @@ pipeline {
 			bat 'dotnet test "C:/Users/tranq/OneDrive/Documents/GitHub/crispy-octo-happiness/Final_Project5/Final_Project5.sln" --no-build --verbosity normal'
 		}
 	}
+    stage ('public den t thu muc')
+	{
+		steps{
+			echo 'Publishing...'
+			bat 'dotnet publish "C:/Users/tranq/OneDrive/Documents/GitHub/crispy-octo-happiness/Final_Project5/Final_Project5.sln" -c Release -o ./publish'
+		}
+	}
   } // end stagess
 }//end pipeline
